@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 
@@ -94,7 +95,13 @@ export const InfiniteMovingCards = ({
             key={idx}
           > 
             <div className="w-full h-full rounded-3xl bg-white overflow-hidden">
-              <img src={item.src} className="w-full rounded-2xl" />
+            <Image 
+              src={item.src} 
+              alt={item.src}
+              className="w-full rounded-2xl" 
+              width={500} // Provide width if known
+              height={300} // Provide height if known
+            />
             </div>
           </li>
         ))}

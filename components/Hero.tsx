@@ -13,7 +13,7 @@ const Hero = () => {
         <Spotlight className="top-28 left-80 h-[80vh] w-[100vw]" fill="purple"/>
       </div>
 
-      <div className="h-screen w-full dark:bg-grid-white/[0.1] bg-grid-black/[0.01] flex items-center justify-center absolute top-0 left-0">
+      <div className="h-screen w-full  flex items-center justify-center absolute top-0 left-0">
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]" />
       </div>
 
@@ -27,6 +27,7 @@ const Hero = () => {
             className="text-center text-[40px] md:text-5xl lg:text-9xl mb-10"
             words="BOWEI ZHANG PORTFOLIO"
           />
+          
 
           <p className="text-center md: tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
             Software Engineer | Mathematician | Artist

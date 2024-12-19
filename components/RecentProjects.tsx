@@ -2,6 +2,7 @@ import { projects } from '@/data'
 import React from 'react'
 import { PinContainer } from './ui/pinContainer'
 import { FaLocationArrow } from 'react-icons/fa'
+import Image from 'next/image'
 
 const RecentProjects = () => {
   return (
@@ -15,7 +16,7 @@ const RecentProjects = () => {
           id,
           title,
           des,
-          Image,
+          src,
           iconLists,
           link,
         }) => (
@@ -23,8 +24,7 @@ const RecentProjects = () => {
             <PinContainer title={link} href={link}>
               <div className='relative flex items-center justify-center sm:w-[570px] overflow-hidden w-[80vw] mb-10 sm:h-[40vh] h-[30vh]'>
                 <div className='relative w-full h-full overflow-hidden lg:rounded-3xl bg-[#13162d] border border-white-100'>
-                  {/* <img src="/bg.png" alt="bg-img" /> */}
-                  <img src={Image} alt={title} className='z-10 absolute top-0 sm:h-[40vh] h-full object-cover' />
+                  <Image src={src} alt={title} className='z-10 absolute top-0 sm:h-[40vh] h-full object-cover' width={600} height={300} />
                 </div>
               </div>
               <h1 className='font-bold lg:text-2xl md:text-xl text-base line-clamp-1'>
@@ -40,7 +40,8 @@ const RecentProjects = () => {
                   {iconLists.map((icon, index) => (
                     <div key={icon} className='border border-white/[0.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center' style={{
                       transform: `translateX(-${5 * index * 2}px)`}}>
-                      <img src={icon} alt={icon} className='p-2' />
+                      <Image src={icon} alt={icon} className='p-2' 
+                        width={100} height={200} />
                     </div>
                   ))}
                 </div>

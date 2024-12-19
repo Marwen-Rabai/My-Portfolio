@@ -115,13 +115,11 @@ export const projects = [
     id: 1,
     title: "React Motion Graphics",
     des: "React Motion Graphics Application, visit for immersive and interactive experiences!",
-    Image: "/motionGraphics.svg",
+    src: "/motionGraphics.svg",
     iconLists: [
       icons["JavaScript"],
       icons["Blender"],
       "/three.svg",
-
-
     ],
     link: "https://motion-graphics-aniu.vercel.app/",
   },
@@ -129,7 +127,7 @@ export const projects = [
     id: 2,
     title: "InfoSTU",
     des: "Student Info Application, developed with Next.js and Spring Boot",
-    Image: "/infoSTU.svg",
+    src: "/infoSTU.svg",
     iconLists: [
       icons["React"],
       icons["Next.js"],
@@ -143,19 +141,19 @@ export const projects = [
 
 export const Drawings = [
   {
-    src: "bowei-e.jpg",
+    src: "/bowei-e.jpg",
   },
   {
-    src: "bowei-asset (1).jpg"
+    src: "/bowei-asset (1).jpg"
   },
   {
-    src: "bowei-asset (2).jpg"
+    src: "/bowei-asset (2).jpg"
   },
   {
-    src: "bowei-img-2472.jpg"
+    src: "/bowei-img-2472.jpg"
   },
   {
-    src: "bowei-img-9360.jpg"
+    src: "/bowei-img-9360.jpg"
   }
 ];
 
