@@ -4,7 +4,7 @@ import { Drawings } from '@/data'
 
 const ArtList = () => {
   return (
-    <div className="py-20">
+    <div className="py-20" id='gallery'>
       <h1 className="heading">
         A LIST OF MY <span className='text-purple'>ARTWORKS</span>
       </h1>
