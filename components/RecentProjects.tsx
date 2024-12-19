@@ -15,7 +15,7 @@ const RecentProjects = () => {
           id,
           title,
           des,
-          img,
+          Image,
           iconLists,
           link,
         }) => (
@@ -24,7 +24,7 @@ const RecentProjects = () => {
               <div className='relative flex items-center justify-center sm:w-[570px] overflow-hidden w-[80vw] mb-10 sm:h-[40vh] h-[30vh]'>
                 <div className='relative w-full h-full overflow-hidden lg:rounded-3xl bg-[#13162d] border border-white-100'>
                   {/* <img src="/bg.png" alt="bg-img" /> */}
-                  <img src={img} alt={title} className='z-10 absolute top-0 sm:h-[40vh] h-full object-cover' />
+                  <img src={Image} alt={title} className='z-10 absolute top-0 sm:h-[40vh] h-full object-cover' />
                 </div>
               </div>
               <h1 className='font-bold lg:text-2xl md:text-xl text-base line-clamp-1'>

@@ -1,4 +1,3 @@
-import { workExperience } from '@/data'
 import React from 'react'
 import { ContainerScroll } from './ui/ContainerScroll'
 

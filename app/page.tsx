@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
 import { FloatingNav } from "@/components/ui/FloatingNav";
-// import Grid from "@/components/Grid";
 import RecentProjects from "@/components/RecentProjects";
 import { navItems } from "@/data";
 import ArtList from "@/components/ArtList";
@@ -12,7 +11,6 @@ import { Vortex } from "@/components/ui/Vortex";
 export default function Home() {
   return (
     <div className="relative min-h-screen">
-      {/* Fixed background vortex */}
       <div className="fixed inset-0 z-0">
         <Vortex 
           backgroundColor="black"
@@ -28,7 +26,6 @@ export default function Home() {
         <main className="relative flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
           <FloatingNav navItems={navItems} />
           <Hero />
-          {/* <Grid /> */}
           <RecentProjects />
           <ArtList />
           <Experience />
