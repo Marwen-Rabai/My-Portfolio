@@ -37,7 +37,7 @@ const glitchVariants = cva("relative inline-block", {
 const GLITCH_CHARS = "!<>-_\\/[]{}—=+*^?#________";
 
 export interface CyberGlitchProps
-  extends React.HTMLAttributes<HTMLElement>,
+  extends Omit<React.HTMLAttributes<HTMLElement>, "color">,
     VariantProps<typeof glitchVariants> {
   text: string;
   as?: React.ElementType;
