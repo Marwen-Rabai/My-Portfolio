@@ -72,9 +72,38 @@
   }
   body {
     @apply bg-background text-foreground;
+    scrollbar-color: rgba(10, 255, 237, 0.5) rgba(0, 0, 0, 0.2);
+    scrollbar-width: thin;
   }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0a0b0e;
+    border-radius: 0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00ffff 0%, #9400d3 100%);
+    border-radius: 0;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #00ffff 0%, #9400d3 80%);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+
   button {
     @apply active:outline-none;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }
 
@@ -85,5 +114,351 @@
 
   .black-gradient {
     background: linear-gradient(90deg, #161a31 0%, #06091f 100%);
+  }
+
+  /* Parallax classes */
+  .parallax {
+    @apply relative overflow-hidden;
+  }
+
+  .parallax-bg {
+    @apply absolute inset-0 w-full h-[120%] top-[-10%];
+    transform: translateZ(0);
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+  }
+
+  /* Cyberpunk section dividers */
+  .cyber-divider {
+    @apply relative h-24 overflow-hidden;
+  }
+
+  .cyber-divider-content {
+    @apply absolute inset-0 overflow-hidden;
+  }
+
+  .cyber-divider-top {
+    @apply absolute top-0 left-0 right-0 h-[1px] z-10;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(10, 255, 237, 0.5),
+      transparent
+    );
+  }
+
+  .cyber-divider-bottom {
+    @apply absolute bottom-0 left-0 right-0 h-[1px] z-10;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(251, 37, 118, 0.5),
+      transparent
+    );
+  }
+
+  .cyber-divider-glitch {
+    @apply absolute inset-0 z-20 pointer-events-none;
+    background-image: repeating-linear-gradient(
+      90deg,
+      rgba(10, 255, 237, 0.03) 0px,
+      rgba(10, 255, 237, 0.03) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 30%,
+      black 70%,
+      transparent
+    );
+  }
+
+  .cyber-divider-diagonal {
+    @apply absolute h-20 w-full z-10;
+    clip-path: polygon(0 0, 100% 100%, 100% 0);
+  }
+
+  .cyber-divider-diagonal-reverse {
+    @apply absolute h-20 w-full z-10;
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+
+  /* Scroll reveal animations */
+  .reveal-on-scroll {
+    @apply opacity-0 translate-y-10 transition-all duration-700;
+  }
+
+  .reveal-on-scroll.active {
+    @apply opacity-100 translate-y-0;
+  }
+
+  /* Linux terminal-style animations */
+  .terminal-text {
+    @apply font-mono text-cyber-teal;
+    white-space: pre;
+    overflow: hidden;
+    border-right: 2px solid rgba(10, 255, 237, 0.75);
+    animation: terminal-typing 3.5s steps(40, end),
+      terminal-cursor 0.75s step-end infinite;
+  }
+
+  .linux-header {
+    @apply relative;
+  }
+
+  .linux-header::before {
+    content: ">";
+    @apply absolute -left-5 text-cyber-magenta;
+    animation: terminal-cursor 0.75s step-end infinite;
+  }
+
+  .scroll-prompt {
+    @apply text-center font-mono text-xs uppercase tracking-wider text-cyber-teal/70;
+    position: relative;
+  }
+
+  .scroll-prompt::after {
+    content: "_";
+    animation: terminal-cursor 0.75s step-end infinite;
+  }
+
+  .command-line {
+    @apply font-mono text-xs;
+    opacity: 0;
+    animation: terminal-line-appear 0.5s forwards;
+  }
+
+  .command-line.delay-1 {
+    animation-delay: 0.5s;
+  }
+
+  .command-line.delay-2 {
+    animation-delay: 1s;
+  }
+
+  .command-line.delay-3 {
+    animation-delay: 1.5s;
+  }
+
+  .linux-scroll-animation {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 2px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  }
+
+  .linux-scroll-animation::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15),
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .linux-scroll-animation::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 255, 0.05) 50%,
+      transparent 100%
+    );
+    animation: linux-scan 3s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .terminal-text {
+    font-family: monospace;
+    letter-spacing: 0.8px;
+  }
+
+  .linux-header {
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .linux-header::before {
+    content: ">";
+    margin-right: 6px;
+    color: #00ffff;
+  }
+
+  .scroll-prompt {
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: terminal-typing 3s steps(30) infinite;
+  }
+
+  .scroll-prompt::after {
+    content: "_";
+    position: absolute;
+    animation: terminal-cursor 1s step-end infinite;
+  }
+
+  .command-line {
+    font-family: monospace;
+    line-height: 1.5;
+    margin-bottom: 4px;
+    opacity: 0;
+    transform: translateY(5px);
+    animation: terminal-line-appear 0.3s ease forwards;
+  }
+
+  .delay-0 {
+    animation-delay: 0.3s;
+  }
+
+  .delay-1 {
+    animation-delay: 1s;
+  }
+
+  .delay-2 {
+    animation-delay: 1.7s;
+  }
+
+  @keyframes terminal-typing {
+    0%,
+    90%,
+    100% {
+      width: 0;
+    }
+    30%,
+    60% {
+      width: 100%;
+    }
+  }
+
+  @keyframes terminal-cursor {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes terminal-line-appear {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes linux-scan {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+/* Cyberpunk glitch animations */
+@keyframes cyber-glitch1 {
+  0% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-2px, 2px);
+  }
+  10% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(1px, -3px);
+  }
+  20% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(3px, 1px);
+  }
+  30% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(-3px, -2px);
+  }
+  40% {
+    clip-path: inset(40% 0 43% 0);
+    transform: translate(1px, 3px);
+  }
+  50% {
+    clip-path: inset(60% 0 2% 0);
+    transform: translate(-1px, -2px);
+  }
+  60% {
+    clip-path: inset(20% 0 70% 0);
+    transform: translate(3px, -1px);
+  }
+  70% {
+    clip-path: inset(60% 0 5% 0);
+    transform: translate(-3px, 2px);
+  }
+  80% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(2px, -2px);
+  }
+  90% {
+    clip-path: inset(70% 0 12% 0);
+    transform: translate(1px, 4px);
+  }
+  100% {
+    clip-path: inset(40% 0 53% 0);
+    transform: translate(-1px, -1px);
+  }
+}
+
+/* Parallax effect */
+@keyframes parallax-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Section transition effect */
+@keyframes section-reveal {
+  from {
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@media (prefers-reduced-motion) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

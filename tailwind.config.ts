@@ -42,6 +42,22 @@ const config = {
           "100": "#E4ECFF",
         },
         purple: "#CBACF9",
+        neon: {
+          pink: "#FF00FF",
+          blue: "#00FFFF",
+          green: "#00FF00",
+          yellow: "#FFFF00",
+          red: "#FF073A",
+          purple: "#BF00FF",
+        },
+        cyber: {
+          black: "#0D0221",
+          darkblue: "#0B2027",
+          purple: "#3F0071",
+          magenta: "#FB2576",
+          teal: "#0AFFED",
+          yellow: "#FFD32D",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -146,19 +162,124 @@ const config = {
             transform: "translate(calc(-50% - 0.5rem))",
           },
         },
+        "glitch-1": {
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "20%": {
+            transform: "translateX(-2px)",
+          },
+          "40%": {
+            transform: "translateX(2px)",
+          },
+          "60%": {
+            transform: "translateX(-2px)",
+          },
+          "80%": {
+            transform: "translateX(2px)",
+          },
+          "100%": {
+            transform: "translateX(0)",
+          },
+        },
+        "glitch-2": {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "20%": {
+            transform: "translateY(2px)",
+          },
+          "40%": {
+            transform: "translateY(-2px)",
+          },
+          "60%": {
+            transform: "translateY(2px)",
+          },
+          "80%": {
+            transform: "translateY(-2px)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+        "text-glitch": {
+          "0%, 100%": {
+            textShadow:
+              "0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75)",
+          },
+          "14%": {
+            textShadow:
+              "0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75), -0.025em 0.05em 0 rgba(0, 0, 255, 0.75)",
+          },
+          "15%": {
+            textShadow:
+              "-0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75)",
+          },
+          "49%": {
+            textShadow:
+              "-0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 255, 0, 0.75), -0.05em -0.05em 0 rgba(0, 0, 255, 0.75)",
+          },
+          "50%": {
+            textShadow:
+              "0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75)",
+          },
+          "99%": {
+            textShadow:
+              "0.025em 0.05em 0 rgba(255, 0, 0, 0.75), 0.05em 0 0 rgba(0, 255, 0, 0.75), 0 -0.05em 0 rgba(0, 0, 255, 0.75)",
+          },
+        },
+        scanline: {
+          "0%": {
+            transform: "translateY(-100%)",
+            opacity: "0.5",
+          },
+          "50%": {
+            opacity: "0.3",
+          },
+          "100%": {
+            transform: "translateY(100vh)",
+            opacity: "0.5",
+          },
+        },
+        noise: {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "10%": { transform: "translate(-5%, -5%)" },
+          "20%": { transform: "translate(-10%, 5%)" },
+          "30%": { transform: "translate(5%, -10%)" },
+          "40%": { transform: "translate(-5%, 15%)" },
+          "50%": { transform: "translate(-10%, 5%)" },
+          "60%": { transform: "translate(15%, 0)" },
+          "70%": { transform: "translate(0, 10%)" },
+          "80%": { transform: "translate(-15%, 0)" },
+          "90%": { transform: "translate(10%, 5%)" },
+        },
+        "cyber-scanline": {
+          "0%": {
+            transform: "translateY(-100vh)",
+          },
+          "100%": {
+            transform: "translateY(100vh)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         spotlight: "spotlight 2s ease .75s 1 forwards",
         shimmer: "shimmer 2s linear infinite",
-        first: "moveVertical 30s ease infinite",
-        second: "moveInCircle 20s reverse infinite",
-        third: "moveInCircle 40s linear infinite",
-        fourth: "moveHorizontal 40s ease infinite",
-        fifth: "moveInCircle 20s ease infinite",
+        "move-horizontal": "moveHorizontal 6s ease-in-out infinite",
+        "move-vertical": "moveVertical 4s ease-in-out infinite",
+        "move-slow": "moveInCircle 20s linear infinite",
+        "move-medium": "moveInCircle 15s linear infinite",
+        "move-fast": "moveInCircle 10s linear infinite",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
+        "text-glitch": "text-glitch 0.5s infinite",
+        "glitch-1": "glitch-1 0.8s infinite alternate",
+        "glitch-2": "glitch-2 0.8s infinite alternate",
+        scanline: "scanline 4s linear infinite",
+        noise: "noise 0.5s infinite alternate-reverse",
+        "cyber-scanline": "cyber-scanline 10s linear infinite",
       },
     },
   },

@@ -1,66 +1,136 @@
-import { projects } from '@/data'
-import React from 'react'
-import { PinContainer } from './ui/pinContainer'
-import { FaLocationArrow } from 'react-icons/fa'
-import Image from 'next/image'
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import { projects } from "@/data";
+import { EdgeCard } from "./ui/EdgeCard";
+import { CyberGlitch } from "./ui/CyberGlitch";
 
 const RecentProjects = () => {
   return (
-    <div className="py-20" id="projects">
-      <h1 className="heading">
-        A SMALL SELECTION OF {' '}
-        <span className='text-purple'>RECENT PROJECTS</span>
-      </h1>
-      <div className='flex flex-wrap items-center justify-center p-4 gap-x-24 gap-y-8 mt-10'>
-        {projects.map(({
-          id,
-          title,
-          des,
-          src,
-          iconLists,
-          link,
-        }) => (
-          <div key={id} className='lg:min-h-[32.5rem] flex items-center justify-center w-[80vw] sm:h-[41rem] h-[32rem] sm:w-[570px]'>
-            <PinContainer title={link} href={link}>
-              <div className='relative flex items-center justify-center sm:w-[570px] overflow-hidden w-[80vw] mb-10 sm:h-[40vh] h-[30vh]'>
-                <div className='relative w-full h-full overflow-hidden lg:rounded-3xl bg-[#13162d] border border-white-100'>
-                  <Image src={src} alt={title} className='z-10 absolute top-0 sm:h-[40vh] h-full object-cover' width={600} height={300} />
-                </div>
-              </div>
-              <h1 className='font-bold lg:text-2xl md:text-xl text-base line-clamp-1'>
-                {title}
-              </h1>
+    <section
+      className="relative py-16 px-4 md:px-6 overflow-hidden"
+      id="projects"
+    >
+      {/* Section header with cyberpunk glitch effect */}
+      <div className="max-w-7xl mx-auto mb-16 text-center reveal-on-scroll">
+        <div className="inline-block relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyber-teal/20 via-transparent to-cyber-magenta/20 rounded-sm blur-sm"></div>
+          <CyberGlitch
+            text="PROJECTS"
+            className="text-sm font-mono text-white/80 uppercase tracking-widest"
+            glitchIntensity="medium"
+            color="primary"
+          />
+        </div>
 
-              <p className='lg:text-xl lg:font-normal font-light text-sm line-clamp-2'>
-                {des}
-              </p>
+        <h2 className="text-4xl md:text-5xl mt-2 font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyber-teal via-white/90 to-cyber-magenta pb-2">
+          Recent Work
+        </h2>
 
-              <div className='flex items-center justify-between mt-7 mb-3'>
-                <div className='flex items-center'>
-                  {iconLists.map((icon, index) => (
-                    <div key={icon} className='border border-white/[0.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center' style={{
-                      transform: `translateX(-${5 * index * 2}px)`}}>
-                      <Image src={icon} alt={icon} className='p-2' 
-                        width={100} height={200} />
-                    </div>
-                  ))}
-                </div>
-              
-                <div className='flex justify-center items-center'>
-                  <p className='flex lg:text-xl md:text-xs text-sm text-purple'>
-                    Check Live Site
-                    <FaLocationArrow className='ms-3 color="#CBACF9'/>
-                  </p>
-                </div>
-
-              </div>
-
-            </PinContainer>
-          </div>
-        ))}
+        <div className="w-32 h-1 mx-auto mt-2 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyber-teal via-white/50 to-cyber-magenta"></div>
+          <div
+            className="absolute top-0 left-0 h-full w-1/2 bg-gradient-to-r from-white/80 to-transparent animate-pulse"
+            style={{ animationDuration: "2s" }}
+          ></div>
+        </div>
       </div>
-    </div>
-  )
-}
 
-export default RecentProjects
+      {/* Projects grid with cyberpunk card design */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((project, index) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="reveal-on-scroll"
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
+            <EdgeCard
+              title={project.title}
+              description={project.des}
+              imageUrl={project.src}
+              link={project.link}
+              techIcons={project.iconLists}
+              className="h-full"
+            />
+          </motion.div>
+        ))}
+
+        {/* "More projects coming soon" card with cyberpunk styling */}
+        <motion.div
+          className="relative overflow-hidden rounded-sm border border-cyber-teal/20 bg-black/30 backdrop-blur-sm flex flex-col items-center justify-center p-6 min-h-[300px] reveal-on-scroll"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, margin: "-100px" }}
+          style={{ transitionDelay: "300ms" }}
+        >
+          {/* Cyberpunk background elements */}
+          <div className="absolute inset-0 bg-grid-small-white/5"></div>
+          <div className="absolute inset-0 overflow-hidden">
+            <div
+              className="absolute -inset-[2px] z-0 opacity-50"
+              style={{
+                background: `repeating-linear-gradient(
+                  90deg,
+                  transparent,
+                  transparent 15px,
+                  rgba(10, 255, 237, 0.1) 15px,
+                  rgba(10, 255, 237, 0.1) 16px
+                )`,
+              }}
+            ></div>
+
+            {/* Corner accents */}
+            <div className="absolute top-0 right-0 w-16 h-16 overflow-hidden pointer-events-none">
+              <div className="absolute top-0 right-0 h-[1px] w-16 bg-gradient-to-l from-cyber-teal/50 to-transparent"></div>
+              <div className="absolute top-0 right-0 w-[1px] h-16 bg-gradient-to-b from-cyber-teal/50 to-transparent"></div>
+            </div>
+            <div className="absolute bottom-0 left-0 w-16 h-16 overflow-hidden pointer-events-none">
+              <div className="absolute bottom-0 left-0 h-[1px] w-16 bg-gradient-to-r from-cyber-magenta/50 to-transparent"></div>
+              <div className="absolute bottom-0 left-0 w-[1px] h-16 bg-gradient-to-t from-cyber-magenta/50 to-transparent"></div>
+            </div>
+          </div>
+
+          <div className="text-center relative z-10">
+            <div className="mb-4 mx-auto w-16 h-16 rounded-full flex items-center justify-center border border-cyber-teal/20 bg-black/40 relative overflow-hidden">
+              {/* Glowing effect */}
+              <div className="absolute inset-0 bg-cyber-teal/5 animate-pulse"></div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-8 h-8 text-cyber-teal"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </div>
+
+            <CyberGlitch
+              text="MORE PROJECTS"
+              className="text-xl font-bold text-white mb-2"
+              glitchIntensity="low"
+            />
+            <p className="text-cyber-teal/60 font-mono text-sm">LOADING...</p>
+          </div>
+
+          {/* Cyberpunk decorative elements */}
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-cyber-magenta/10 blur-2xl"></div>
+          <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-cyber-teal/10 blur-2xl"></div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default RecentProjects;
