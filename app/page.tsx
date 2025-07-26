@@ -2,10 +2,12 @@
 
 import { navItems } from "@/data";
 import RecentProjects from "@/components/RecentProjects";
-import ArtList from "@/components/ArtList";
+import About from "@/components/About";
+import Skills from "@/components/Skills";
 import Footer from "@/components/Footer";
 import NewHero from "@/components/NewHero";
 import Contact from "@/components/Contact";
+import BackToTop from "@/components/BackToTop";
 import { EdgeNav } from "@/components/ui/EdgeNav";
 import { NoiseBackground } from "@/components/ui/NoiseBackground";
 import { useEffect } from "react";
@@ -186,7 +188,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Art Gallery Section */}
+          {/* About Section */}
           <section className="relative w-full min-h-screen pt-16">
             <div className="absolute inset-0 z-0">
               <div className="absolute inset-0 bg-gradient-to-b from-cyber-darkblue/90 via-cyber-black/80 to-black/80"></div>
@@ -207,8 +209,52 @@ export default function Home() {
               </div>
             </div>
 
-            <TerminalSection title="VISUAL_DATABASE" commands={artCommands}>
-              <ArtList />
+            <TerminalSection title="ABOUT_DATABASE" commands={artCommands}>
+              <About />
+            </TerminalSection>
+          </section>
+
+          {/* Cyberpunk Divider */}
+          <div className="cyber-divider">
+            <div className="cyber-divider-content bg-gradient-to-b from-black to-cyber-purple/30">
+              <div className="cyber-divider-top"></div>
+              <div className="cyber-divider-glitch"></div>
+              <div
+                className="absolute inset-0 bg-grid-small-white/5"
+                style={{
+                  transform: "skewY(-1deg)",
+                  transformOrigin: "top right",
+                }}
+              ></div>
+              <div className="absolute top-0 left-0 w-1/3 h-full bg-neon-pink/5 blur-[100px] rounded-full"></div>
+              <div className="absolute bottom-0 right-0 w-1/3 h-full bg-neon-blue/5 blur-[100px] rounded-full"></div>
+              <div className="cyber-divider-bottom"></div>
+            </div>
+          </div>
+
+          {/* Skills Section */}
+          <section className="relative w-full min-h-screen pt-16">
+            <div className="absolute inset-0 z-0">
+              <div className="absolute inset-0 bg-gradient-to-b from-cyber-darkblue/90 via-cyber-black/80 to-black/80"></div>
+              <div className="absolute inset-0 bg-grid-small-white/5 mix-blend-overlay"></div>
+              <div className="parallax-bg" data-speed="0.1">
+                {/* Cyberpunk hexagon pattern */}
+                <div
+                  className="absolute inset-0 opacity-5"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 17.32v34.64L30 60 0 43.32V17.32L30 0zm0 4L4 18.87v30.26L30 56l26-6.87V18.87L30 4z' fill='%23FFFFFF' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+                    backgroundSize: "60px 60px",
+                  }}
+                ></div>
+
+                {/* Glowing elements */}
+                <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-cyber-magenta/10 blur-[100px] mix-blend-screen"></div>
+                <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-cyber-teal/10 blur-[100px] mix-blend-screen"></div>
+              </div>
+            </div>
+
+            <TerminalSection title="SKILLS_DATABASE" commands={artCommands}>
+              <Skills />
             </TerminalSection>
           </section>
 
@@ -300,6 +346,9 @@ export default function Home() {
             </TerminalSection>
           </section>
         </main>
+        
+        {/* Back to Top Button */}
+        <BackToTop />
       </div>
     </>
   );

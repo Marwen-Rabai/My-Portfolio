@@ -21,47 +21,71 @@ const geistMono = Geist_Mono({
 // Enhanced metadata configuration
 export const metadata: Metadata = {
   title: {
-    default: "Cyberpunk Portfolio | Digital Art & Creative Technology",
-    template: "%s | Cyberpunk Portfolio",
+    default: "Marwen Rabai | The Portfolio of a Passionate Professional",
+    template: "%s | Marwen Rabai",
   },
   description:
-    "Explore a cyberpunk-themed showcase of digital art, creative coding, and cutting-edge interactive projects",
+    "The Portfolio of a Passionate Professional. Discover the art of being seen with Marwen Rabai, a Digital Marketing & SEO Specialist and Event Organizer with 14+ years of experience. Explore premium projects, innovative strategies, and a showcase of digital excellence.",
   keywords: [
-    "cyberpunk",
-    "portfolio",
-    "digital art",
-    "creative coding",
-    "interactive",
-    "technology",
+    "Marwen Rabai",
+    "Digital Marketing",
+    "SEO Specialist",
+    "Event Organizer",
+    "Portfolio",
+    "Professional",
+    "Premium",
+    "Modern",
+    "2025",
+    "necibnexus.com",
+    "Criti-Aura",
+    "AI App",
+    "Event Platform",
+    "Branding",
+    "User Experience",
+    "The Art of Being Seen"
   ],
-  authors: [{ name: "Bowei Zhang" }],
-  creator: "Bowei Zhang",
-  publisher: "Bowei Zhang",
+  authors: [{ name: "Marwen Rabai" }],
+  creator: "Marwen Rabai",
+  publisher: "Marwen Rabai",
   formatDetection: {
-    email: false,
+    email: true,
     address: false,
-    telephone: false,
+    telephone: true,
   },
-  metadataBase: new URL("https://bowei.art"),
+  metadataBase: new URL("https://marwenrabai.com"),
   alternates: {
     canonical: "/",
   },
   manifest: "/manifest.json",
   openGraph: {
-    title: "Cyberpunk Portfolio | Digital Art & Creative Technology",
+    title: "Marwen Rabai | The Portfolio of a Passionate Professional",
     description:
-      "Explore a cyberpunk-themed showcase of digital art, creative coding, and cutting-edge interactive projects",
-    url: "https://bowei.art",
-    siteName: "Cyberpunk Portfolio",
+      "The Portfolio of a Passionate Professional. Discover the art of being seen with Marwen Rabai, a Digital Marketing & SEO Specialist and Event Organizer with 14+ years of experience. Explore premium projects, innovative strategies, and a showcase of digital excellence.",
+    url: "https://marwenrabai.com",
+    siteName: "Marwen Rabai Portfolio",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/MY_Picture.webp",
+        width: 800,
+        height: 800,
+        alt: "Marwen Rabai - The Art of Being Seen",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cyberpunk Portfolio | Digital Art & Creative Technology",
+    title: "Marwen Rabai | The Portfolio of a Passionate Professional",
     description:
-      "Explore a cyberpunk-themed showcase of digital art, creative coding, and cutting-edge interactive projects",
-    creator: "@bowei",
+      "The Portfolio of a Passionate Professional. Discover the art of being seen with Marwen Rabai, a Digital Marketing & SEO Specialist and Event Organizer with 14+ years of experience. Explore premium projects, innovative strategies, and a showcase of digital excellence.",
+    creator: "@marwenrabai",
+    images: [
+      {
+        url: "/MY_Picture.webp",
+        alt: "Marwen Rabai - The Art of Being Seen",
+      },
+    ],
   },
   icons: {
     icon: [

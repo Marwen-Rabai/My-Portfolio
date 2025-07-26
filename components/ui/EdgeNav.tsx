@@ -46,7 +46,14 @@ export const EdgeNav = ({ navItems }: EdgeNavProps) => {
       <div className="container mx-auto flex items-center justify-between py-3 px-4 relative">
         {/* Logo */}
         <GlitchEffect intensity="low" className="text-white">
-          <span className="text-lg font-bold tracking-tight">BW</span>
+          <span className="inline-flex items-center">
+            <img
+              src="/MY_Picture.webp"
+              alt="Marwen Rabai Logo - The Art of Being Seen"
+              className="w-10 h-10 rounded-full border-2 border-cyber-teal shadow-lg object-cover bg-black/60 hover:scale-105 transition-transform duration-300"
+              style={{ boxShadow: '0 4px 24px 0 rgba(0,255,255,0.15)' }}
+            />
+          </span>
         </GlitchEffect>
 
         {/* Desktop nav items */}

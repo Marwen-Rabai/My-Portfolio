@@ -160,7 +160,7 @@ const NewHero = () => {
                         rounded-sm blur-sm animate-pulse"
             ></div>
             <CyberGlitch
-              text="CYBERPUNK PORTFOLIO"
+              text="DIGITAL_ARCHITECT_OF_SUCCESS"
               className="text-xs tracking-widest uppercase text-white/90 border border-white/20 py-1 px-3 rounded-sm font-mono"
               color="primary"
               glitchIntensity="medium"
@@ -171,11 +171,19 @@ const NewHero = () => {
           <div className="mb-10 relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-cyber-magenta/30 via-transparent to-cyber-teal/30 rounded-lg blur-md"></div>
             <CyberGlitch
-              text="BOWEI ZHANG"
+              text="MARWEN RABAI"
               as="h1"
               className="text-7xl md:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyber-magenta via-white/90 to-cyber-teal leading-none tracking-tighter"
               glitchIntensity="high"
             />
+            <div className="mt-4 flex flex-col items-center gap-2">
+              <span className="text-cyber-teal text-lg md:text-2xl font-semibold font-mono tracking-wide uppercase drop-shadow-lg">
+                The Portfolio of a Passionate Professional
+              </span>
+              <span className="text-cyber-magenta text-base md:text-lg font-mono italic opacity-80">
+                "The Art of Being Seen"
+              </span>
+            </div>
           </div>
 
           {/* Subtitle with animated typing effect */}
@@ -195,13 +203,13 @@ const NewHero = () => {
                 times: [0, 0.2, 0.4, 0.6, 0.8, 1],
               }}
             >
-              <span className="block h-8 text-cyber-teal">HACKER</span>
-              <span className="block h-8 text-neon-pink">NETRUNNER</span>
+              <span className="block h-8 text-cyber-teal">DIGITAL MARKETING SPECIALIST</span>
+              <span className="block h-8 text-neon-pink">SEO EXPERT</span>
               <span className="block h-8 text-cyber-yellow">
-                DIGITAL ARTIST
+                EVENT ORGANIZER
               </span>
-              <span className="block h-8 text-cyber-teal">SYSTEM BREAKER</span>
-              <span className="block h-8 text-neon-pink">CODE JUNKIE</span>
+              <span className="block h-8 text-cyber-teal">CONTENT CREATOR</span>
+              <span className="block h-8 text-neon-pink">LEADERSHIP EXPERT</span>
             </motion.p>
           </motion.div>
 
@@ -222,10 +230,10 @@ const NewHero = () => {
               className="px-6 py-3 border border-cyber-teal/40 hover:border-cyber-teal/80 text-white rounded-sm font-medium transition-all flex items-center gap-2 relative group overflow-hidden"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection("gallery")}
+              onClick={() => scrollToSection("skills")}
             >
               <span className="absolute inset-0 w-0 bg-gradient-to-r from-cyber-teal/20 to-transparent transition-all duration-300 ease-out group-hover:w-full"></span>
-              <span className="relative z-10">VIEW_GALLERY</span>
+              <span className="relative z-10">VIEW_SKILLS</span>
               <span className="relative z-10 font-mono">→</span>
             </motion.button>
           </div>

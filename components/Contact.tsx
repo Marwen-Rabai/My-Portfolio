@@ -56,8 +56,8 @@ const Contact = () => {
                 className="text-xl font-bold text-white mb-3"
                 glitchIntensity="low"
               />
-              <p className="text-cyber-teal/70 font-mono text-sm">
-                {/* USE_SECURE_CHANNELS */}
+              <p className="text-cyber-teal/70 font-mono text-sm mb-4">
+                Ready to elevate your brand with innovative digital marketing or unforgettable events? Connect with me at
               </p>
             </div>
 

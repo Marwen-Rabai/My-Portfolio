@@ -31,7 +31,7 @@ const Footer = () => {
             {/* Logo */}
             <div className="flex flex-col items-center space-y-2">
               <CyberGlitch
-                text="BOWEI_ZHANG"
+                text="MARWEN_RABAI"
                 className="text-lg md:text-xl font-bold text-white tracking-wide"
                 glitchIntensity="low"
               />
@@ -58,10 +58,18 @@ const Footer = () => {
               </motion.div>
               <motion.div whileHover={{ y: -2 }} className="group">
                 <Link
-                  href="#gallery"
+                  href="#about"
                   className="font-mono text-white/70 hover:text-cyber-teal transition-colors"
                 >
-                  <span className="text-cyber-teal/80">&gt;</span> GALLERY
+                  <span className="text-cyber-teal/80">&gt;</span> ABOUT
+                </Link>
+              </motion.div>
+              <motion.div whileHover={{ y: -2 }} className="group">
+                <Link
+                  href="#skills"
+                  className="font-mono text-white/70 hover:text-cyber-teal transition-colors"
+                >
+                  <span className="text-cyber-teal/80">&gt;</span> SKILLS
                 </Link>
               </motion.div>
               <motion.div whileHover={{ y: -2 }} className="group">
@@ -78,13 +86,13 @@ const Footer = () => {
             <div className="text-sm text-cyber-teal/60 text-center font-mono">
               <div>
                 <span className="text-cyber-teal/80">&#47;&#47;</span> ©{" "}
-                {currentYear} BOWEI_ZHANG{" "}
+                {currentYear} MARWEN_RABAI{" "}
                 <span className="text-cyber-teal/80">|</span>{" "}
                 ALL_RIGHTS_RESERVED
               </div>
               <div className="mt-1 text-xs">
                 <span className="text-cyber-magenta/70">&#60;&#47;&#62;</span>{" "}
-                BUILT_WITH_NEXT.JS_AND_TAILWIND
+                CRAFTING_DIGITAL_EXPERIENCES_WITH_PRECISION
               </div>
             </div>
           </div>
