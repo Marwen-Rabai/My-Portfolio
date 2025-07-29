@@ -86,7 +86,7 @@ const Footer = () => {
             <div className="text-sm text-cyber-teal/60 text-center font-mono">
               <div>
                 <span className="text-cyber-teal/80">&#47;&#47;</span> ©{" "}
-                {currentYear} MARWEN_RABAI{" "}
+                2009 MARWEN_RABAI{" "}
                 <span className="text-cyber-teal/80">|</span>{" "}
                 ALL_RIGHTS_RESERVED
               </div>
