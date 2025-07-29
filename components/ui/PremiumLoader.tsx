@@ -12,6 +12,21 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("INITIALIZING...");
   const [isVisible, setIsVisible] = useState(true);
+  const [windowSize, setWindowSize] = useState({ width: 800, height: 600 });
+
+  // Handle window size safely
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      
+      const handleResize = () => {
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+      };
+      
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   const loadingSteps = [
     { progress: 20, text: "LOADING_ASSETS..." },
@@ -22,13 +37,23 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
   ];
 
   useEffect(() => {
+    let isMounted = true;
+    
     const timer = setInterval(() => {
+      if (!isMounted) return;
+      
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
           setTimeout(() => {
-            setIsVisible(false);
-            setTimeout(onLoadingComplete, 800);
+            if (isMounted) {
+              setIsVisible(false);
+              setTimeout(() => {
+                if (isMounted) {
+                  onLoadingComplete();
+                }
+              }, 800);
+            }
           }, 1500);
           return 100;
         }
@@ -42,7 +67,10 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
       });
     }, 100);
 
-    return () => clearInterval(timer);
+    return () => {
+      isMounted = false;
+      clearInterval(timer);
+    };
   }, [onLoadingComplete]);
 
   if (!isVisible) return null;
@@ -91,8 +119,8 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
                 key={i}
                 className="absolute w-1 h-1 bg-cyber-teal rounded-full"
                 initial={{
-                  x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 800,
-                  y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 600,
+                  x: Math.random() * windowSize.width,
+                  y: Math.random() * windowSize.height,
                   opacity: 0,
                 }}
                 animate={{
@@ -123,6 +151,10 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
               src="/MY_Picture.webp"
               alt="Marwen Rabai"
               className="w-24 h-24 rounded-full mx-auto relative z-10 border-2 border-cyber-teal shadow-2xl object-cover"
+              onError={(e) => {
+                // Fallback if image fails to load
+                e.currentTarget.style.display = 'none';
+              }}
             />
             
             {/* Rotating ring */}

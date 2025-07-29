@@ -14,6 +14,7 @@ import { PremiumLoader } from "@/components/ui/PremiumLoader";
 import { MobileOptimized, useMobileOptimization } from "@/components/ui/MobileOptimized";
 import { useEffect, useState } from "react";
 import { TerminalSection } from "@/components/TerminalSection";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -100,169 +101,171 @@ export default function Home() {
   ];
 
   return (
-    <MobileOptimized>
-      {/* Client-side scroll effects */}
-      <ScrollReveal />
+    <ErrorBoundary>
+      <MobileOptimized>
+        {/* Client-side scroll effects */}
+        <ScrollReveal />
 
-      {/* Enhanced noise overlay with mobile optimization */}
-      <NoiseBackground />
+        {/* Enhanced noise overlay with mobile optimization */}
+        <NoiseBackground />
 
-      {/* Optimized cyberpunk scanlines */}
-      <div className="fixed inset-0 z-[5] pointer-events-none">
-        <div className="absolute inset-0 bg-cyber-black/10 mix-blend-overlay"></div>
-        <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
-          {!isMobile && (
-            <>
-              <div
-                className="absolute w-full h-[1px] bg-neon-blue/20 animate-cyber-scanline"
-                style={{ filter: "blur(0.5px)" }}
-              ></div>
-              <div
-                className="absolute w-full h-[1px] bg-neon-pink/15 animate-cyber-scanline"
-                style={{ 
-                  filter: "blur(0.5px)",
-                  animationDelay: "5s",
-                  animationDuration: "12s"
-                }}
-              ></div>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Enhanced floating nav with mobile optimization */}
-      <div className="relative z-30">
-        <EdgeNav navItems={navItems} />
-      </div>
-
-      {/* Main content */}
-      <div className="relative z-10">
-        <main className="min-h-screen">
-          {/* Hero Section */}
-          <section className="min-h-screen w-full mobile-reveal">
-            <NewHero />
-          </section>
-
-          {/* Cyberpunk Divider */}
-          <div className="cyber-divider">
-            <div className="cyber-divider-content bg-black">
-              <div className="cyber-divider-top"></div>
-              <div className="cyber-divider-glitch"></div>
-              <div
-                className="absolute inset-0 bg-grid-small-white/5"
-                style={{
-                  transform: "skewY(-2deg)",
-                  transformOrigin: "top left",
-                }}
-              ></div>
-              <div className="absolute top-0 right-0 w-1/3 h-full bg-neon-blue/5 blur-[100px] rounded-full"></div>
-              <div className="absolute bottom-0 left-0 w-1/3 h-full bg-neon-pink/5 blur-[100px] rounded-full"></div>
-              <div className="cyber-divider-bottom"></div>
-            </div>
+        {/* Optimized cyberpunk scanlines */}
+        <div className="fixed inset-0 z-[5] pointer-events-none">
+          <div className="absolute inset-0 bg-cyber-black/10 mix-blend-overlay"></div>
+          <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
+            {!isMobile && (
+              <>
+                <div
+                  className="absolute w-full h-[1px] bg-neon-blue/20 animate-cyber-scanline"
+                  style={{ filter: "blur(0.5px)" }}
+                ></div>
+                <div
+                  className="absolute w-full h-[1px] bg-neon-pink/15 animate-cyber-scanline"
+                  style={{ 
+                    filter: "blur(0.5px)",
+                    animationDelay: "5s",
+                    animationDuration: "12s"
+                  }}
+                ></div>
+              </>
+            )}
           </div>
+        </div>
 
-          {/* Projects Section */}
-          <section className="relative w-full min-h-screen pt-16 mobile-reveal">
-            <div className="absolute inset-0 pointer-events-none z-0">
-              <div className="absolute inset-0 bg-gradient-to-b from-cyber-black/90 to-black/90"></div>
-              <div className="absolute inset-0 bg-grid-small-white/5"></div>
-              {!isMobile && (
-                <div className="parallax-bg" data-speed="0.2">
-                  <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-neon-blue/5 blur-[150px] rounded-full"></div>
-                  <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-neon-pink/5 blur-[150px] rounded-full"></div>
-                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-neon-blue/50 via-transparent to-transparent"></div>
-                  <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-neon-pink/50 via-transparent to-transparent"></div>
-                </div>
-              )}
+        {/* Enhanced floating nav with mobile optimization */}
+        <div className="relative z-30">
+          <EdgeNav navItems={navItems} />
+        </div>
+
+        {/* Main content */}
+        <div className="relative z-10">
+          <main className="min-h-screen">
+            {/* Hero Section */}
+            <section className="min-h-screen w-full mobile-reveal">
+              <NewHero />
+            </section>
+
+            {/* Cyberpunk Divider */}
+            <div className="cyber-divider">
+              <div className="cyber-divider-content bg-black">
+                <div className="cyber-divider-top"></div>
+                <div className="cyber-divider-glitch"></div>
+                <div
+                  className="absolute inset-0 bg-grid-small-white/5"
+                  style={{
+                    transform: "skewY(-2deg)",
+                    transformOrigin: "top left",
+                  }}
+                ></div>
+                <div className="absolute top-0 right-0 w-1/3 h-full bg-neon-blue/5 blur-[100px] rounded-full"></div>
+                <div className="absolute bottom-0 left-0 w-1/3 h-full bg-neon-pink/5 blur-[100px] rounded-full"></div>
+                <div className="cyber-divider-bottom"></div>
+              </div>
             </div>
 
-            <TerminalSection
-              title="PROJECT_DATABASE"
-              commands={projectCommands}
-            >
-              <RecentProjects />
-            </TerminalSection>
-          </section>
+            {/* Projects Section */}
+            <section className="relative w-full min-h-screen pt-16 mobile-reveal">
+              <div className="absolute inset-0 pointer-events-none z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-cyber-black/90 to-black/90"></div>
+                <div className="absolute inset-0 bg-grid-small-white/5"></div>
+                {!isMobile && (
+                  <div className="parallax-bg" data-speed="0.2">
+                    <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-neon-blue/5 blur-[150px] rounded-full"></div>
+                    <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-neon-pink/5 blur-[150px] rounded-full"></div>
+                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-neon-blue/50 via-transparent to-transparent"></div>
+                    <div className="absolute top-0 right-0 w-[1px] h-full bg-gradient-to-b from-neon-pink/50 via-transparent to-transparent"></div>
+                  </div>
+                )}
+              </div>
 
-          {/* About Section */}
-          <section className="relative w-full min-h-screen pt-16 mobile-reveal">
-            <div className="absolute inset-0 z-0">
-              <div className="absolute inset-0 bg-gradient-to-b from-cyber-darkblue/90 via-cyber-black/80 to-black/80"></div>
-              <div className="absolute inset-0 bg-grid-small-white/5 mix-blend-overlay"></div>
-              {!isMobile && (
-                <div className="parallax-bg" data-speed="0.1">
-                  <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-cyber-magenta/10 blur-[100px] mix-blend-screen"></div>
-                  <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-cyber-teal/10 blur-[100px] mix-blend-screen"></div>
-                </div>
-              )}
-            </div>
+              <TerminalSection
+                title="PROJECT_DATABASE"
+                commands={projectCommands}
+              >
+                <RecentProjects />
+              </TerminalSection>
+            </section>
 
-            <TerminalSection title="ABOUT_DATABASE" commands={artCommands}>
-              <About />
-            </TerminalSection>
-          </section>
+            {/* About Section */}
+            <section className="relative w-full min-h-screen pt-16 mobile-reveal">
+              <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-cyber-darkblue/90 via-cyber-black/80 to-black/80"></div>
+                <div className="absolute inset-0 bg-grid-small-white/5 mix-blend-overlay"></div>
+                {!isMobile && (
+                  <div className="parallax-bg" data-speed="0.1">
+                    <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-cyber-magenta/10 blur-[100px] mix-blend-screen"></div>
+                    <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-cyber-teal/10 blur-[100px] mix-blend-screen"></div>
+                  </div>
+                )}
+              </div>
 
-          {/* Skills Section */}
-          <section className="relative w-full min-h-screen pt-16 mobile-reveal">
-            <div className="absolute inset-0 z-0">
-              <div className="absolute inset-0 bg-gradient-to-b from-cyber-darkblue/90 via-cyber-black/80 to-black/80"></div>
-              <div className="absolute inset-0 bg-grid-small-white/5 mix-blend-overlay"></div>
-              {!isMobile && (
-                <div className="parallax-bg" data-speed="0.1">
-                  <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-cyber-magenta/10 blur-[100px] mix-blend-screen"></div>
-                  <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-cyber-teal/10 blur-[100px] mix-blend-screen"></div>
-                </div>
-              )}
-            </div>
+              <TerminalSection title="ABOUT_DATABASE" commands={artCommands}>
+                <About />
+              </TerminalSection>
+            </section>
 
-            <TerminalSection title="SKILLS_DATABASE" commands={artCommands}>
-              <Skills />
-            </TerminalSection>
-          </section>
+            {/* Skills Section */}
+            <section className="relative w-full min-h-screen pt-16 mobile-reveal">
+              <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-cyber-darkblue/90 via-cyber-black/80 to-black/80"></div>
+                <div className="absolute inset-0 bg-grid-small-white/5 mix-blend-overlay"></div>
+                {!isMobile && (
+                  <div className="parallax-bg" data-speed="0.1">
+                    <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-cyber-magenta/10 blur-[100px] mix-blend-screen"></div>
+                    <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-cyber-teal/10 blur-[100px] mix-blend-screen"></div>
+                  </div>
+                )}
+              </div>
 
-          {/* Contact Section */}
-          <section className="relative w-full min-h-screen pt-16 mobile-reveal">
-            <div className="absolute inset-0 z-0">
-              <div className="absolute inset-0 bg-gradient-to-b from-cyber-purple/30 to-cyber-black"></div>
-              <div className="absolute inset-0 bg-grid-small-white/5"></div>
-              {!isMobile && (
-                <div className="parallax-bg" data-speed="0.15">
-                  <div className="absolute top-0 right-0 w-1/4 h-1/4 bg-neon-pink/5 blur-[100px] rounded-full"></div>
-                  <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-neon-blue/5 blur-[100px] rounded-full"></div>
-                </div>
-              )}
-            </div>
+              <TerminalSection title="SKILLS_DATABASE" commands={artCommands}>
+                <Skills />
+              </TerminalSection>
+            </section>
 
-            <TerminalSection
-              title="CONTACT_TERMINAL"
-              commands={contactCommands}
-            >
-              <Contact />
-            </TerminalSection>
-          </section>
+            {/* Contact Section */}
+            <section className="relative w-full min-h-screen pt-16 mobile-reveal">
+              <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-cyber-purple/30 to-cyber-black"></div>
+                <div className="absolute inset-0 bg-grid-small-white/5"></div>
+                {!isMobile && (
+                  <div className="parallax-bg" data-speed="0.15">
+                    <div className="absolute top-0 right-0 w-1/4 h-1/4 bg-neon-pink/5 blur-[100px] rounded-full"></div>
+                    <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-neon-blue/5 blur-[100px] rounded-full"></div>
+                  </div>
+                )}
+              </div>
 
-          {/* Footer */}
-          <section className="relative w-full">
-            <div className="absolute inset-0 z-0">
-              <div className="absolute inset-0 bg-gradient-to-b from-black to-cyber-black/90"></div>
-              <div className="absolute inset-0 bg-grid-small-white/5"></div>
-              {!isMobile && (
-                <>
-                  <div className="absolute bottom-0 left-0 w-1/3 h-1/2 rounded-full bg-neon-blue/5 blur-[100px]"></div>
-                  <div className="absolute top-0 right-0 w-1/3 h-1/2 rounded-full bg-neon-pink/5 blur-[100px]"></div>
-                </>
-              )}
-            </div>
+              <TerminalSection
+                title="CONTACT_TERMINAL"
+                commands={contactCommands}
+              >
+                <Contact />
+              </TerminalSection>
+            </section>
 
-            <TerminalSection title="SYS_INFO" showPrompt={false}>
-              <Footer />
-            </TerminalSection>
-          </section>
-        </main>
-        
-        {/* Back to Top Button */}
-        <BackToTop />
-      </div>
-    </MobileOptimized>
+            {/* Footer */}
+            <section className="relative w-full">
+              <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-black to-cyber-black/90"></div>
+                <div className="absolute inset-0 bg-grid-small-white/5"></div>
+                {!isMobile && (
+                  <>
+                    <div className="absolute bottom-0 left-0 w-1/3 h-1/2 rounded-full bg-neon-blue/5 blur-[100px]"></div>
+                    <div className="absolute top-0 right-0 w-1/3 h-1/2 rounded-full bg-neon-pink/5 blur-[100px]"></div>
+                  </>
+                )}
+              </div>
+
+              <TerminalSection title="SYS_INFO" showPrompt={false}>
+                <Footer />
+              </TerminalSection>
+            </section>
+          </main>
+          
+          {/* Back to Top Button */}
+          <BackToTop />
+        </div>
+      </MobileOptimized>
+    </ErrorBoundary>
   );
 }
