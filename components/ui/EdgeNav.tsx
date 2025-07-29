@@ -7,6 +7,15 @@ import Image from "next/image";
 
 export function EdgeNav({ navItems }: { navItems: Array<{ name: string; link: string; icon?: React.JSX.Element }> }) {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+  };
 
   return (
     <>
@@ -42,6 +51,11 @@ export function EdgeNav({ navItems }: { navItems: Array<{ name: string; link: st
                 className="font-mono text-sm text-white/70 hover:text-cyber-teal transition-colors tracking-wider relative group"
                 onMouseEnter={() => setHoverIndex(index)}
                 onMouseLeave={() => setHoverIndex(null)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  const sectionId = item.link.replace('#', '');
+                  scrollToSection(sectionId);
+                }}
               >
                 <span className="relative z-10">{item.name}</span>
                 
@@ -63,7 +77,7 @@ export function EdgeNav({ navItems }: { navItems: Array<{ name: string; link: st
           {/* Action button */}
           <div className="flex items-center">
             <button 
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => scrollToSection('contact')}
               className="px-4 py-2 bg-cyber-teal/20 border border-cyber-teal/40 hover:border-cyber-teal/80 text-white rounded-sm font-mono text-sm transition-all hover:bg-cyber-teal/30"
             >
               CONNECT
@@ -94,15 +108,40 @@ export function EdgeNav({ navItems }: { navItems: Array<{ name: string; link: st
 
           {/* Mobile menu button */}
           <button 
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="px-3 py-1 bg-cyber-teal/20 border border-cyber-teal/40 text-white rounded-sm font-mono text-xs transition-all hover:bg-cyber-teal/30"
           >
-            MENU
+            {isMobileMenuOpen ? 'CLOSE' : 'MENU'}
           </button>
         </div>
         
-        {/* FloatingNav for mobile navigation */}
-        <FloatingNav navItems={navItems} />
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="mt-2 bg-black/95 backdrop-blur-md border border-cyber-teal/30 rounded-sm p-4 w-full">
+            <div className="space-y-3">
+              {navItems.map((item, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    const sectionId = item.link.replace('#', '');
+                    scrollToSection(sectionId);
+                  }}
+                  className="block w-full text-left font-mono text-sm text-white/70 hover:text-cyber-teal transition-colors tracking-wider py-2 px-3 rounded-sm hover:bg-cyber-teal/10"
+                >
+                  {item.name}
+                </button>
+              ))}
+              <div className="border-t border-cyber-teal/20 pt-3 mt-3">
+                <button 
+                  onClick={() => scrollToSection('contact')}
+                  className="w-full px-4 py-2 bg-cyber-teal/20 border border-cyber-teal/40 hover:border-cyber-teal/80 text-white rounded-sm font-mono text-sm transition-all hover:bg-cyber-teal/30"
+                >
+                  CONNECT
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

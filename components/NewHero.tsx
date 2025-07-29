@@ -133,22 +133,28 @@ const NewHero = () => {
               className="text-6xl md:text-8xl lg:text-9xl font-bold leading-none tracking-tighter relative"
             >
               <div className="relative">
-                <motion.span 
-                  className="text-white block"
+                <motion.div
                   initial={{ opacity: 0, x: -50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.6 }}
+                  className="block mb-2"
                 >
-                  MARWEN
-                </motion.span>
+                  <CyberGlitch
+                    text="MARWEN"
+                    className="text-6xl md:text-8xl lg:text-9xl font-bold text-white"
+                    glitchIntensity="medium"
+                    as="span"
+                  />
+                </motion.div>
                 <motion.div
                   initial={{ opacity: 0, x: 50 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 1, delay: 0.8 }}
+                  className="block"
                 >
                   <CyberGlitch
                     text="RABAI"
-                    className="bg-clip-text text-transparent bg-gradient-to-r from-cyber-teal via-white to-cyber-magenta font-bold"
+                    className="text-6xl md:text-8xl lg:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyber-teal via-white to-cyber-magenta"
                     glitchIntensity="high"
                     as="span"
                   />
