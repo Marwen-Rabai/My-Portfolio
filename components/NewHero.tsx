@@ -59,7 +59,7 @@ const NewHero = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-black">
+    <div className="relative min-h-screen w-full overflow-hidden bg-black pt-20 md:pt-24">
       {/* Enhanced cyberpunk grid background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-grid-small-white/[0.02] bg-[size:50px_50px]" />
@@ -118,60 +118,96 @@ const NewHero = () => {
           >
             <CyberGlitch
               text="DIGITAL_ARCHITECT_OF_SUCCESS"
-              className="text-xs md:text-sm font-mono text-cyber-teal tracking-widest"
+              className="text-xs md:text-sm font-mono text-cyber-teal tracking-widest border border-cyber-teal/20 px-3 py-1 rounded-sm"
               glitchIntensity="low"
             />
           </motion.div>
 
-          {/* Main title with enhanced effects */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-4xl md:text-7xl lg:text-8xl font-bold mb-8 relative"
-          >
-            <div className="relative">
-              <span className="text-white">MARWEN</span>
-              <br />
-              <CyberGlitch
-                text="RABAI"
-                className="text-4xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyber-teal via-white to-cyber-magenta"
-                glitchIntensity="medium"
-              />
-            </div>
-
+          {/* Main title with enhanced cyberpunk glitch effect */}
+          <div className="mb-10 relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyber-magenta/30 via-transparent to-cyber-teal/30 rounded-lg blur-md"></div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="text-6xl md:text-8xl lg:text-9xl font-bold leading-none tracking-tighter relative"
+            >
+              <div className="relative">
+                <motion.span 
+                  className="text-white block"
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, delay: 0.6 }}
+                >
+                  MARWEN
+                </motion.span>
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 1, delay: 0.8 }}
+                >
+                  <CyberGlitch
+                    text="RABAI"
+                    className="bg-clip-text text-transparent bg-gradient-to-r from-cyber-teal via-white to-cyber-magenta font-bold"
+                    glitchIntensity="high"
+                    as="span"
+                  />
+                </motion.div>
+              </div>
+            </motion.h1>
+            
             {/* Glowing underline */}
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-cyber-teal to-transparent blur-sm opacity-60"></div>
-          </motion.h1>
+            <motion.div 
+              className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-cyber-teal to-transparent blur-sm opacity-60"
+              initial={{ width: 0 }}
+              animate={{ width: "75%" }}
+              transition={{ duration: 1.5, delay: 1.2 }}
+            />
+          </div>
 
           {/* Professional taglines */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 1.0 }}
             className="mb-8 space-y-2"
           >
             <div className="flex flex-col items-center space-y-1">
-              <span className="text-cyber-teal text-lg md:text-2xl font-semibold font-mono tracking-wide uppercase drop-shadow-lg">
+              <motion.span 
+                className="text-cyber-teal text-lg md:text-2xl font-semibold font-mono tracking-wide uppercase drop-shadow-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+              >
                 The Portfolio of a Passionate Professional
-              </span>
-              <span className="text-cyber-magenta text-base md:text-lg font-mono italic opacity-80">
+              </motion.span>
+              <motion.span 
+                className="text-cyber-magenta text-base md:text-lg font-mono italic opacity-80"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 0.8, y: 0 }}
+                transition={{ duration: 0.6, delay: 1.4 }}
+              >
                 &ldquo;The Art of Being Seen&rdquo;
-              </span>
+              </motion.span>
             </div>
           </motion.div>
 
-          {/* Subtitle with animated typing effect */}
+          {/* Subtitle with enhanced typing effect */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
+            transition={{ duration: 1, delay: 1.6 }}
             className="mb-12"
           >
             <div className="text-xl md:text-3xl font-mono text-white/90 mb-4">
-              <span className="text-cyber-teal">
+              <motion.span 
+                className="text-cyber-teal"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 1.8 }}
+              >
                 DIGITAL MARKETING SPECIALIST
-              </span>
+              </motion.span>
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
@@ -181,32 +217,49 @@ const NewHero = () => {
               </motion.span>
             </div>
 
-            <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+            <motion.p 
+              className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 2.0 }}
+            >
               Crafting premium digital experiences and unforgettable events with{" "}
               <span className="text-cyber-teal font-semibold">14+ years</span> of expertise across{" "}
               <span className="text-cyber-magenta font-semibold">North Africa</span>
-            </p>
+            </motion.p>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* Enhanced CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.6 }}
+            transition={{ duration: 0.8, delay: 2.2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <motion.button
               onClick={() => scrollToSection("skills")}
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 255, 255, 0.5)" }}
+              whileHover={{ 
+                scale: 1.05, 
+                boxShadow: "0 0 30px rgba(0, 255, 255, 0.5)",
+                backgroundColor: "rgba(0, 255, 255, 0.1)"
+              }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-cyber-teal/20 to-cyber-magenta/20 border border-cyber-teal/50 hover:border-cyber-teal text-white rounded-sm font-mono text-sm md:text-base tracking-wider transition-all duration-300 backdrop-blur-sm"
+              className="px-8 py-4 bg-gradient-to-r from-cyber-teal/20 to-cyber-magenta/20 border border-cyber-teal/50 hover:border-cyber-teal text-white rounded-sm font-mono text-sm md:text-base tracking-wider transition-all duration-300 backdrop-blur-sm relative group overflow-hidden"
             >
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-cyber-teal/20 to-cyber-magenta/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                initial={false}
+              />
               <span className="relative z-10">VIEW_SKILLS</span>
             </motion.button>
 
             <motion.button
               onClick={() => scrollToSection("contact")}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ 
+                scale: 1.05,
+                borderColor: "rgba(255,255,255,0.8)",
+                backgroundColor: "rgba(255,255,255,0.1)"
+              }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 border border-white/30 hover:border-white/60 text-white hover:bg-white/10 rounded-sm font-mono text-sm md:text-base tracking-wider transition-all duration-300 backdrop-blur-sm"
             >
@@ -214,29 +267,49 @@ const NewHero = () => {
             </motion.button>
           </motion.div>
 
-          {/* Scroll indicator */}
+          {/* Enhanced scroll indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 2 }}
+            transition={{ duration: 1, delay: 2.4 }}
             className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           >
             <motion.div
               animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="flex flex-col items-center space-y-2 text-white/60"
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center space-y-2 text-white/60 cursor-pointer"
+              onClick={() => scrollToSection("about")}
             >
-              <span className="text-xs font-mono tracking-wider">SCROLL</span>
+              <span className="text-xs font-mono tracking-wider">SCROLL_DOWN</span>
               <div className="w-[1px] h-8 bg-gradient-to-b from-cyber-teal to-transparent"></div>
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                className="w-1 h-1 bg-cyber-teal rounded-full"
+              />
             </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* Ambient lighting effects */}
+      {/* Enhanced ambient lighting effects */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-cyber-teal/5 blur-[100px] rounded-full"></div>
-        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-cyber-magenta/5 blur-[100px] rounded-full"></div>
+        <motion.div 
+          className="absolute top-0 right-0 w-1/3 h-1/3 bg-cyber-teal/5 blur-[100px] rounded-full"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.05, 0.1, 0.05]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-cyber-magenta/5 blur-[100px] rounded-full"
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.1, 0.05, 0.1]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
       </div>
     </div>
   );
