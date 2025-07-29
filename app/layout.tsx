@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: true,
   },
-  metadataBase: new URL("https://marwenrabai.com"),
+  metadataBase: new URL("https://marwen-rabai.netlify.app"),
   alternates: {
     canonical: "/",
   },
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: "Marwen Rabai | The Portfolio of a Passionate Professional",
     description:
       "The Portfolio of a Passionate Professional. Discover the art of being seen with Marwen Rabai, a Digital Marketing & SEO Specialist and Event Organizer with 14+ years of experience. Explore premium projects, innovative strategies, and a showcase of digital excellence.",
-    url: "https://marwenrabai.com",
+    url: "https://marwen-rabai.netlify.app",
     siteName: "Marwen Rabai Portfolio",
     locale: "en_US",
     type: "website",

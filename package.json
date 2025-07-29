@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "deploy": "npm run build && npm run export",
+    "netlify-build": "npm run build"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",
@@ -34,6 +37,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@netlify/plugin-nextjs": "^5.11.6",
     "@next/eslint-plugin-next": "^15.1.1",
     "@types/node": "^20",
     "@types/react": "^19",
