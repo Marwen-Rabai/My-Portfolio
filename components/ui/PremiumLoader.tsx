@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CyberGlitch } from "./CyberGlitch";
+import Image from "next/image";
 
 interface PremiumLoaderProps {
   onLoadingComplete: () => void;
@@ -147,14 +148,13 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
             <div className="absolute inset-0 bg-cyber-teal/30 rounded-full blur-xl animate-pulse" />
-            <img
+            <Image
               src="/MY_Picture.webp"
               alt="Marwen Rabai"
+              width={96}
+              height={96}
               className="w-24 h-24 rounded-full mx-auto relative z-10 border-2 border-cyber-teal shadow-2xl object-cover"
-              onError={(e) => {
-                // Fallback if image fails to load
-                e.currentTarget.style.display = 'none';
-              }}
+              priority
             />
             
             {/* Rotating ring */}

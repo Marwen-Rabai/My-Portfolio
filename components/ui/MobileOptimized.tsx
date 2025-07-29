@@ -9,84 +9,73 @@ interface MobileOptimizedProps {
 
 export const MobileOptimized: React.FC<MobileOptimizedProps> = ({ children }) => {
   const [isMobile, setIsMobile] = useState(false);
-  const [isScrolling, setIsScrolling] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
-  // Optimized mobile detection
+  // Detect mobile device
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth <= 768 || 
-                   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      setIsMobile(mobile);
+      const userAgent = navigator.userAgent.toLowerCase();
+      const mobileKeywords = ['mobile', 'android', 'iphone', 'ipad', 'tablet'];
+      const isMobileDevice = mobileKeywords.some(keyword => userAgent.includes(keyword));
+      const isSmallScreen = window.innerWidth < 768;
+      setIsMobile(isMobileDevice || isSmallScreen);
     };
 
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Optimized scroll handling for mobile
   const handleScroll = useCallback(() => {
-    if (!isMobile) return;
-    
-    setIsScrolling(true);
-    
-    // Use passive listeners and throttle for better performance
-    const scrollElements = document.querySelectorAll<HTMLElement>(".mobile-reveal");
-    const windowHeight = window.innerHeight;
-    
-    scrollElements.forEach((element) => {
-      const elementTop = element.getBoundingClientRect().top;
-      const elementVisible = windowHeight * 0.8; // 80% of viewport
-      
-      if (elementTop < elementVisible) {
-        element.classList.add("mobile-active");
-      }
-    });
-
-    // Clear scrolling state after a delay
-    setTimeout(() => setIsScrolling(false), 150);
+    if (isMobile) {
+      // Light scroll handling for mobile
+      const elements = document.querySelectorAll('.mobile-reveal');
+      elements.forEach((element) => {
+        const rect = element.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight * 0.8;
+        
+        if (isVisible) {
+          element.classList.add('mobile-visible');
+        }
+      });
+    }
   }, [isMobile]);
 
+  // Add optimized scroll listener
   useEffect(() => {
-    if (!isMobile) return;
-
-    // Use passive listener for better performance on mobile
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    if (isMobile) {
+      const throttledScroll = () => {
+        requestAnimationFrame(handleScroll);
+      };
+      
+      window.addEventListener('scroll', throttledScroll, { passive: true });
+      return () => window.removeEventListener('scroll', throttledScroll);
+    }
   }, [handleScroll, isMobile]);
 
-  // Mobile-specific animation variants
+  // Mobile-optimized animation variants
   const mobileVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: shouldReduceMotion ? 0 : 30,
-      scale: shouldReduceMotion ? 1 : 0.95
-    },
+    hidden: { opacity: 0 },
     visible: { 
-      opacity: 1, 
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: shouldReduceMotion ? 0.1 : 0.6,
-        ease: "easeOut"
-      }
+      opacity: 1,
+      transition: { duration: 0.3, ease: "easeOut" }
     }
   };
 
   const desktopVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" }
     }
   };
 
   return (
     <motion.div
       className={`mobile-optimized ${isMobile ? 'is-mobile' : 'is-desktop'}`}
-      variants={isMobile ? mobileVariants : desktopVariants}
+      variants={isMobile || shouldReduceMotion ? mobileVariants : desktopVariants}
       initial="hidden"
       animate="visible"
     >
@@ -95,29 +84,23 @@ export const MobileOptimized: React.FC<MobileOptimizedProps> = ({ children }) =>
   );
 };
 
-// Hook for mobile-specific optimizations
+// Custom hook for mobile optimization
 export const useMobileOptimization = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const [orientation, setOrientation] = useState<"portrait" | "landscape">("portrait");
 
   useEffect(() => {
-    const checkDevice = () => {
-      const mobile = window.innerWidth <= 768;
-      const isPortrait = window.innerHeight > window.innerWidth;
-      
-      setIsMobile(mobile);
-      setOrientation(isPortrait ? "portrait" : "landscape");
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const mobileKeywords = ['mobile', 'android', 'iphone', 'ipad', 'tablet'];
+      const isMobileDevice = mobileKeywords.some(keyword => userAgent.includes(keyword));
+      const isSmallScreen = window.innerWidth < 768;
+      setIsMobile(isMobileDevice || isSmallScreen);
     };
 
-    checkDevice();
-    window.addEventListener("resize", checkDevice);
-    window.addEventListener("orientationchange", checkDevice);
-
-    return () => {
-      window.removeEventListener("resize", checkDevice);
-      window.removeEventListener("orientationchange", checkDevice);
-    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  return { isMobile, orientation };
+  return { isMobile };
 }; 

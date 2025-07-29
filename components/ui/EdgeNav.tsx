@@ -1,147 +1,78 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { GlitchEffect } from "./GlitchEffect";
+import { CyberGlitch } from "./CyberGlitch";
+import { FloatingNav } from "./FloatingNav";
+import Image from "next/image";
 
-interface NavItem {
-  name: string;
-  link: string;
-  icon?: React.ReactNode;
-}
-
-interface EdgeNavProps {
-  navItems: NavItem[];
-}
-
-export const EdgeNav = ({ navItems }: EdgeNavProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState("");
-
-  const toggleMenu = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  // Smooth scroll function
-  const scrollToSection = (id: string) => {
-    // Close the menu
-    setIsOpen(false);
-
-    // Extract the ID from href like "#projects"
-    const sectionId = id.replace("#", "");
-    const element = document.getElementById(sectionId);
-
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setActiveItem(id);
-    }
-  };
+export function EdgeNav({ navItems }: { navItems: Array<{ name: string; link: string; icon?: React.JSX.Element }> }) {
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-40">
-      {/* Background blur effect */}
-      <div className="absolute inset-0 backdrop-blur-md bg-black/20 border-b border-white/10"></div>
-
-      {/* Desktop nav */}
-      <div className="container mx-auto flex items-center justify-between py-3 px-4 relative">
-        {/* Logo */}
-        <GlitchEffect intensity="low" className="text-white">
-          <span className="inline-flex items-center">
-            <img
+    <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 group">
+      <div className="flex items-center justify-between bg-black/80 backdrop-blur-md border border-cyber-teal/30 rounded-sm px-6 py-3 min-w-[800px]">
+        {/* Premium logo with profile picture */}
+        <div className="flex items-center space-x-3">
+          <div className="relative">
+            <Image
               src="/MY_Picture.webp"
-              alt="Marwen Rabai Logo - The Art of Being Seen"
-              className="w-10 h-10 rounded-full border-2 border-cyber-teal shadow-lg object-cover bg-black/60 hover:scale-105 transition-transform duration-300"
-              style={{ boxShadow: '0 4px 24px 0 rgba(0,255,255,0.15)' }}
+              alt="Marwen Rabai"
+              width={40}
+              height={40}
+              className="w-10 h-10 rounded-full border-2 border-cyber-teal/60 shadow-lg object-cover hover:border-cyber-teal transition-all duration-300 hover:shadow-cyber-teal/20 hover:shadow-lg"
+              priority
             />
-          </span>
-        </GlitchEffect>
+            <div className="absolute inset-0 rounded-full bg-cyber-teal/10 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+          </div>
+          <CyberGlitch
+            text="MARWEN_RABAI"
+            className="font-bold text-lg text-white tracking-tight"
+            glitchIntensity="low"
+          />
+        </div>
 
-        {/* Desktop nav items */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <motion.div
-              key={item.name}
-              className="relative"
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
+        {/* Navigation items */}
+        <div className="flex items-center space-x-8">
+          {navItems.map((item, index) => (
+            <a
+              key={index}
+              href={item.link}
+              className="font-mono text-sm text-white/70 hover:text-cyber-teal transition-colors tracking-wider relative group"
+              onMouseEnter={() => setHoverIndex(index)}
+              onMouseLeave={() => setHoverIndex(null)}
             >
-              <button
-                onClick={() => scrollToSection(item.link)}
-                className={`text-sm text-white/70 hover:text-white transition-colors ${
-                  activeItem === item.link ? "text-white" : ""
-                }`}
-              >
-                {item.name}
-                {activeItem === item.link && (
-                  <motion.div
-                    layoutId="active-indicator"
-                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-white/0 via-neon-blue/70 to-white/0"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </button>
-            </motion.div>
+              <span className="relative z-10">{item.name}</span>
+              
+              {/* Hover effect */}
+              <div 
+                className={`absolute bottom-0 left-0 h-[1px] bg-cyber-teal transition-all duration-300 ${
+                  hoverIndex === index ? 'w-full' : 'w-0'
+                }`} 
+              />
+              
+              {/* Glow effect */}
+              {hoverIndex === index && (
+                <div className="absolute inset-0 bg-cyber-teal/5 blur-sm rounded-sm -z-10" />
+              )}
+            </a>
           ))}
         </div>
 
-        {/* Mobile menu button */}
-        <motion.button
-          className="md:hidden relative z-50 w-10 h-10 flex flex-col items-center justify-center gap-1.5"
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-          whileTap={{ scale: 0.95 }}
-        >
-          <motion.div
-            className="w-6 h-[1px] bg-white rounded-full"
-            animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 3 : 0 }}
-          />
-          <motion.div
-            className="w-6 h-[1px] bg-white rounded-full"
-            animate={{ opacity: isOpen ? 0 : 1 }}
-          />
-          <motion.div
-            className="w-6 h-[1px] bg-white rounded-full"
-            animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -3 : 0 }}
-          />
-        </motion.button>
+        {/* Action button */}
+        <div className="flex items-center">
+          <button 
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-4 py-2 bg-cyber-teal/20 border border-cyber-teal/40 hover:border-cyber-teal/80 text-white rounded-sm font-mono text-sm transition-all hover:bg-cyber-teal/30"
+          >
+            CONNECT
+          </button>
+        </div>
       </div>
 
-      {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed inset-0 z-30 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-          >
-            <nav className="flex flex-col items-center space-y-6">
-              {navItems.map((item) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <button
-                    onClick={() => scrollToSection(item.link)}
-                    className="text-xl font-medium text-white/80 hover:text-white transition-colors relative group"
-                  >
-                    {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-neon-blue/70 group-hover:w-full transition-all duration-300" />
-                  </button>
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Floating nav for smaller screens */}
+      <div className="lg:hidden">
+        <FloatingNav navItems={navItems} />
+      </div>
     </div>
   );
-};
+}

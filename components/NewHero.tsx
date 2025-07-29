@@ -181,7 +181,7 @@ const NewHero = () => {
                 The Portfolio of a Passionate Professional
               </span>
               <span className="text-cyber-magenta text-base md:text-lg font-mono italic opacity-80">
-                "The Art of Being Seen"
+                &ldquo;The Art of Being Seen&rdquo;
               </span>
             </div>
           </div>
