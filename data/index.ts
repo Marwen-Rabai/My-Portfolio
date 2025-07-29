@@ -115,7 +115,7 @@ export const projects = [
     id: 2,
     title: "Criti-Aura",
     des: "A revolutionary app redefining user interaction through AI-driven personalization and cutting-edge UX. Criti-Aura sets a new benchmark for intelligent mobile experiences.",
-    src: "/premium/app-interface.jpg",
+    src: "/premium/Cr7 Cristi Aura Logo.jpg",
     iconLists: [
       icons["React Native"],
       icons["OpenAI"],
@@ -139,7 +139,7 @@ export const projects = [
     id: 4,
     title: "Uber Sand Food Marketing Campaign",
     des: "Led a digital marketing campaign for Uber Sand Food, increasing brand reach by 50% through targeted SEO and content strategies. The campaign elevated customer engagement across North Africa.",
-    src: "/premium/marketing-campaign.jpg",
+    src: "/premium/uber sand food.jpg",
     iconLists: [
       icons["SEMrush"],
       icons["Google Ads"],

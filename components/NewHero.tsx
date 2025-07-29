@@ -13,36 +13,27 @@ const MESH_POINTS = [
   { left: "40%", top: "25%" },
 ];
 
+// Pre-calculated particle animations to avoid hydration mismatch
+const PARTICLE_ANIMATIONS = [
+  { x: [-20, 15, -10], y: [-15, 20, -25], duration: 20 },
+  { x: [25, -15, 30], y: [10, -30, 15], duration: 25 },
+  { x: [-10, 25, -20], y: [-25, 10, -15], duration: 30 },
+  { x: [15, -20, 25], y: [20, -15, 30], duration: 35 },
+  { x: [-25, 10, -15], y: [-10, 25, -20], duration: 40 },
+];
+
 const NewHero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isMounted, setIsMounted] = useState(false);
-  const [particles, setParticles] = useState<
-    Array<{ x: number[]; y: number[]; duration: number }>
-  >([]);
 
-  // Initialize particles with deterministic values for first render
+  // Initialize on client side only
   useEffect(() => {
     setIsMounted(true);
-
-    // Generate random animations once on client
-    const newParticles = MESH_POINTS.map((_, i) => ({
-      x: [
-        Math.random() * 50 - 25,
-        Math.random() * 50 - 25,
-        Math.random() * 50 - 25,
-      ],
-      y: [
-        Math.random() * 50 - 25,
-        Math.random() * 50 - 25,
-        Math.random() * 50 - 25,
-      ],
-      duration: 20 + i * 5,
-    }));
-
-    setParticles(newParticles);
   }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       // Throttle mouse movement updates
       const throttle = () => {
@@ -57,7 +48,7 @@ const NewHero = () => {
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [isMounted]);
 
   // Smooth scroll function
   const scrollToSection = (id: string) => {
@@ -68,115 +59,99 @@ const NewHero = () => {
   };
 
   return (
-    <section
-      className="relative min-h-screen w-full flex flex-col items-center justify-center pt-24 pb-12"
-      id="top"
-    >
-      {/* Enhanced cyberpunk background effect */}
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-cyber-black via-black/90 to-cyber-darkblue/80 z-0"
-        style={{
-          backgroundImage: isMounted
-            ? `radial-gradient(
-            circle at ${mousePosition.x}px ${mousePosition.y}px,
-            rgba(251, 37, 118, 0.15) 0%,
-            transparent 35%
-          )`
-            : `radial-gradient(
-            circle at 50% 50%,
-            rgba(251, 37, 118, 0.15) 0%,
-            transparent 35%
-          )`,
-        }}
-      >
-        {/* Cyberpunk grid overlay */}
-        <div className="absolute inset-0 bg-grid-small-white/10 z-10 opacity-30"></div>
+    <div className="relative min-h-screen w-full overflow-hidden bg-black">
+      {/* Enhanced cyberpunk grid background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-grid-small-white/[0.02] bg-[size:50px_50px]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyber-black via-black to-cyber-darkblue" />
+      </div>
 
-        {/* Digital noise texture */}
-        <div
-          className="absolute inset-0 z-5 opacity-5 mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          }}
-        ></div>
-
-        {/* Enhanced animated glow points */}
-        <div className="absolute h-full w-full">
-          {MESH_POINTS.map((point, i) => (
+      {/* Floating mesh particles - only render on client */}
+      {isMounted && (
+        <div className="absolute inset-0 z-10">
+          {MESH_POINTS.map((point, index) => (
             <motion.div
-              key={i}
-              className="absolute rounded-full"
+              key={index}
+              className="absolute w-2 h-2 bg-cyber-teal/30 rounded-full blur-sm"
               style={{
-                width: i % 2 ? "200px" : "150px",
-                height: i % 2 ? "200px" : "150px",
-                background:
-                  i % 2
-                    ? `radial-gradient(circle, rgba(251, 37, 118, 0.15) 0%, transparent 70%)`
-                    : `radial-gradient(circle, rgba(10, 255, 237, 0.15) 0%, transparent 70%)`,
                 left: point.left,
                 top: point.top,
-                filter: "blur(30px)",
               }}
-              animate={
-                isMounted && particles.length > 0
-                  ? {
-                      x: particles[i]?.x || [0, 0, 0],
-                      y: particles[i]?.y || [0, 0, 0],
-                      scale: [0.8, 1.2, 0.9],
-                    }
-                  : {}
-              }
+              animate={{
+                x: PARTICLE_ANIMATIONS[index].x,
+                y: PARTICLE_ANIMATIONS[index].y,
+              }}
               transition={{
-                duration: particles[i]?.duration || 20,
+                duration: PARTICLE_ANIMATIONS[index].duration,
                 repeat: Infinity,
-                ease: "linear",
+                repeatType: "reverse",
+                ease: "easeInOut",
               }}
             />
           ))}
         </div>
-      </div>
+      )}
 
-      {/* Horizontal scan line effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-10">
-        <div className="absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]">
-          <div
-            className="absolute w-full h-[1px] bg-neon-blue/30 animate-scanline"
-            style={{ top: "30%", filter: "blur(0.5px)" }}
-          ></div>
-          <div
-            className="absolute w-full h-[1px] bg-cyber-magenta/30 animate-scanline"
-            style={{ top: "70%", filter: "blur(0.5px)", animationDelay: "2s" }}
-          ></div>
-        </div>
-      </div>
+      {/* Interactive mouse follower - only on client */}
+      {isMounted && (
+        <motion.div
+          className="absolute w-96 h-96 rounded-full pointer-events-none z-10"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,255,255,0.1) 0%, rgba(255,0,128,0.05) 50%, transparent 70%)",
+            left: mousePosition.x - 192,
+            top: mousePosition.y - 192,
+          }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        />
+      )}
 
-      {/* Content */}
-      <div className="container relative z-20 px-4 md:px-6">
-        <div className="flex flex-col items-center text-center">
-          {/* Small glitching cyberpunk tag */}
-          <div className="mb-6 relative">
-            <div
-              className="absolute inset-0 bg-gradient-to-r from-cyber-magenta/20 via-transparent to-cyber-teal/20 
-                        rounded-sm blur-sm animate-pulse"
-            ></div>
+      {/* Main content */}
+      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-4 py-16">
+        <div className="max-w-6xl mx-auto text-center">
+          {/* Small tag with glitch effect */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-6"
+          >
             <CyberGlitch
               text="DIGITAL_ARCHITECT_OF_SUCCESS"
-              className="text-xs tracking-widest uppercase text-white/90 border border-white/20 py-1 px-3 rounded-sm font-mono"
-              color="primary"
-              glitchIntensity="medium"
+              className="text-xs md:text-sm font-mono text-cyber-teal tracking-widest"
+              glitchIntensity="low"
             />
-          </div>
+          </motion.div>
 
-          {/* Main title with enhanced cyberpunk glitch effect */}
-          <div className="mb-10 relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyber-magenta/30 via-transparent to-cyber-teal/30 rounded-lg blur-md"></div>
-            <CyberGlitch
-              text="MARWEN RABAI"
-              as="h1"
-              className="text-7xl md:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyber-magenta via-white/90 to-cyber-teal leading-none tracking-tighter"
-              glitchIntensity="high"
-            />
-            <div className="mt-4 flex flex-col items-center gap-2">
+          {/* Main title with enhanced effects */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="text-4xl md:text-7xl lg:text-8xl font-bold mb-8 relative"
+          >
+            <div className="relative">
+              <span className="text-white">MARWEN</span>
+              <br />
+              <CyberGlitch
+                text="RABAI"
+                className="text-4xl md:text-7xl lg:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyber-teal via-white to-cyber-magenta"
+                glitchIntensity="medium"
+              />
+            </div>
+
+            {/* Glowing underline */}
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-cyber-teal to-transparent blur-sm opacity-60"></div>
+          </motion.h1>
+
+          {/* Professional taglines */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="mb-8 space-y-2"
+          >
+            <div className="flex flex-col items-center space-y-1">
               <span className="text-cyber-teal text-lg md:text-2xl font-semibold font-mono tracking-wide uppercase drop-shadow-lg">
                 The Portfolio of a Passionate Professional
               </span>
@@ -184,99 +159,86 @@ const NewHero = () => {
                 &ldquo;The Art of Being Seen&rdquo;
               </span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Subtitle with animated typing effect */}
           <motion.div
-            className="h-8 mb-10 overflow-hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+            transition={{ duration: 1, delay: 1.2 }}
+            className="mb-12"
           >
-            <motion.p
-              className="font-mono text-lg font-medium"
-              animate={{ y: [0, -30, -60, -90, -120, 0] }}
-              transition={{
-                duration: 7,
-                repeat: Infinity,
-                ease: "easeInOut",
-                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-              }}
-            >
-              <span className="block h-8 text-cyber-teal">DIGITAL MARKETING SPECIALIST</span>
-              <span className="block h-8 text-neon-pink">SEO EXPERT</span>
-              <span className="block h-8 text-cyber-yellow">
-                EVENT ORGANIZER
+            <div className="text-xl md:text-3xl font-mono text-white/90 mb-4">
+              <span className="text-cyber-teal">
+                DIGITAL MARKETING SPECIALIST
               </span>
-              <span className="block h-8 text-cyber-teal">CONTENT CREATOR</span>
-              <span className="block h-8 text-neon-pink">LEADERSHIP EXPERT</span>
-            </motion.p>
+              <motion.span
+                animate={{ opacity: [1, 0] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+                className="text-cyber-teal ml-1"
+              >
+                |
+              </motion.span>
+            </div>
+
+            <p className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              Crafting premium digital experiences and unforgettable events with{" "}
+              <span className="text-cyber-teal font-semibold">14+ years</span> of expertise across{" "}
+              <span className="text-cyber-magenta font-semibold">North Africa</span>
+            </p>
           </motion.div>
 
-          {/* Enhanced CTA buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-4">
-            <motion.button
-              className="px-6 py-3 bg-cyber-magenta/20 border border-cyber-magenta/40 hover:border-cyber-magenta/80 text-white backdrop-blur-sm rounded-sm font-medium transition-all flex items-center gap-2 relative group overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection("projects")}
-            >
-              <span className="absolute inset-0 w-0 bg-gradient-to-r from-cyber-magenta/20 to-cyber-teal/20 transition-all duration-300 ease-out group-hover:w-full"></span>
-              <span className="relative z-10">EXPLORE_PROJECTS</span>
-              <span className="relative z-10 font-mono">→</span>
-            </motion.button>
-
-            <motion.button
-              className="px-6 py-3 border border-cyber-teal/40 hover:border-cyber-teal/80 text-white rounded-sm font-medium transition-all flex items-center gap-2 relative group overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection("skills")}
-            >
-              <span className="absolute inset-0 w-0 bg-gradient-to-r from-cyber-teal/20 to-transparent transition-all duration-300 ease-out group-hover:w-full"></span>
-              <span className="relative z-10">VIEW_SKILLS</span>
-              <span className="relative z-10 font-mono">→</span>
-            </motion.button>
-          </div>
-
-          {/* Enhanced scroll indicator - moved from absolute position to within flow */}
+          {/* CTA Buttons */}
           <motion.div
-            className="mt-12"
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{
-              delay: 1.5,
-              duration: 0.5,
-              y: {
-                duration: 0.8,
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-              },
-            }}
+            transition={{ duration: 0.8, delay: 1.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <div
-              className="flex flex-col items-center gap-2 cursor-pointer"
-              onClick={() => scrollToSection("projects")}
+            <motion.button
+              onClick={() => scrollToSection("skills")}
+              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(0, 255, 255, 0.5)" }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-cyber-teal/20 to-cyber-magenta/20 border border-cyber-teal/50 hover:border-cyber-teal text-white rounded-sm font-mono text-sm md:text-base tracking-wider transition-all duration-300 backdrop-blur-sm"
             >
-              <div className="text-xs uppercase tracking-wider text-white/50 font-mono">
-                SCROLL_DOWN
-              </div>
-              <div className="w-5 h-9 rounded-full border border-cyber-teal/30 flex justify-center overflow-hidden">
-                <motion.div
-                  className="w-1 h-1 rounded-full bg-cyber-teal mt-2"
-                  animate={{ y: [0, 15, 0] }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-              </div>
-            </div>
+              <span className="relative z-10">VIEW_SKILLS</span>
+            </motion.button>
+
+            <motion.button
+              onClick={() => scrollToSection("contact")}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 border border-white/30 hover:border-white/60 text-white hover:bg-white/10 rounded-sm font-mono text-sm md:text-base tracking-wider transition-all duration-300 backdrop-blur-sm"
+            >
+              GET_IN_TOUCH
+            </motion.button>
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 2 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="flex flex-col items-center space-y-2 text-white/60"
+            >
+              <span className="text-xs font-mono tracking-wider">SCROLL</span>
+              <div className="w-[1px] h-8 bg-gradient-to-b from-cyber-teal to-transparent"></div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
-    </section>
+
+      {/* Ambient lighting effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-cyber-teal/5 blur-[100px] rounded-full"></div>
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-cyber-magenta/5 blur-[100px] rounded-full"></div>
+      </div>
+    </div>
   );
 };
 

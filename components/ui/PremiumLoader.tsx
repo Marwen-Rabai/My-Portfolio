@@ -13,20 +13,11 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("INITIALIZING...");
   const [isVisible, setIsVisible] = useState(true);
-  const [windowSize, setWindowSize] = useState({ width: 800, height: 600 });
+  const [isMounted, setIsMounted] = useState(false);
 
-  // Handle window size safely
+  // Ensure component is mounted before using window
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-      
-      const handleResize = () => {
-        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-      };
-      
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }
+    setIsMounted(true);
   }, []);
 
   const loadingSteps = [
@@ -38,19 +29,19 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
   ];
 
   useEffect(() => {
-    let isMounted = true;
+    let isMountedRef = true;
     
     const timer = setInterval(() => {
-      if (!isMounted) return;
+      if (!isMountedRef) return;
       
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
           setTimeout(() => {
-            if (isMounted) {
+            if (isMountedRef) {
               setIsVisible(false);
               setTimeout(() => {
-                if (isMounted) {
+                if (isMountedRef) {
                   onLoadingComplete();
                 }
               }, 800);
@@ -69,12 +60,21 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
     }, 100);
 
     return () => {
-      isMounted = false;
+      isMountedRef = false;
       clearInterval(timer);
     };
   }, [onLoadingComplete]);
 
   if (!isVisible) return null;
+
+  // Use consistent values for SSR/client
+  const particleCount = 15; // Fixed count instead of random
+  const staticParticles = Array.from({ length: particleCount }, (_, i) => ({
+    id: i,
+    x: (i * 73) % 800, // Deterministic positioning
+    y: (i * 137) % 600,
+    delay: i * 0.2,
+  }));
 
   return (
     <AnimatePresence>
@@ -113,29 +113,31 @@ export const PremiumLoader: React.FC<PremiumLoaderProps> = ({ onLoadingComplete 
             ))}
           </div>
 
-          {/* Floating particles */}
-          <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-cyber-teal rounded-full"
-                initial={{
-                  x: Math.random() * windowSize.width,
-                  y: Math.random() * windowSize.height,
-                  opacity: 0,
-                }}
-                animate={{
-                  y: [null, -50, 50, -30],
-                  opacity: [0, 1, 0.5, 0],
-                }}
-                transition={{
-                  duration: 4 + Math.random() * 2,
-                  delay: Math.random() * 2,
-                  repeat: Infinity,
-                }}
-              />
-            ))}
-          </div>
+          {/* Static positioned particles for consistent SSR */}
+          {isMounted && (
+            <div className="absolute inset-0">
+              {staticParticles.map((particle) => (
+                <motion.div
+                  key={particle.id}
+                  className="absolute w-1 h-1 bg-cyber-teal rounded-full"
+                  initial={{
+                    x: particle.x,
+                    y: particle.y,
+                    opacity: 0,
+                  }}
+                  animate={{
+                    y: [particle.y, particle.y - 50, particle.y + 50, particle.y - 30],
+                    opacity: [0, 1, 0.5, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    delay: particle.delay,
+                    repeat: Infinity,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Main content */}
