@@ -240,7 +240,7 @@ const NewHero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 2.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
           >
             <motion.button
               onClick={() => scrollToSection("skills")}
@@ -273,12 +273,12 @@ const NewHero = () => {
             </motion.button>
           </motion.div>
 
-          {/* Enhanced scroll indicator */}
+          {/* Enhanced scroll indicator - positioned with proper spacing */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 2.4 }}
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
           >
             <motion.div
               animate={{ y: [0, 10, 0] }}
