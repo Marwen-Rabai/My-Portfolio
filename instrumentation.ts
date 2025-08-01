@@ -1,13 +1,10 @@
-import * as Sentry from '@sentry/nextjs';
+// Completely disable Sentry instrumentation
+// import * as Sentry from '@sentry/nextjs';
 
 export async function register() {
-  if (process.env.NEXT_RUNTIME === 'nodejs') {
-    await import('./sentry.server.config');
-  }
-
-  if (process.env.NEXT_RUNTIME === 'edge') {
-    await import('./sentry.edge.config');
-  }
+  // Sentry disabled - no instrumentation
+  console.log('Instrumentation disabled');
 }
 
-export const onRequestError = Sentry.captureRequestError;
+// Remove Sentry error capture
+// export const onRequestError = Sentry.captureRequestError;

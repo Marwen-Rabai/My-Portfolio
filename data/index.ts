@@ -8,8 +8,8 @@ export const navItems = [
 
 export const aboutMe = {
   name: "Marwen Rabai",
-  title: "Digital Marketing & SEO Specialist | Event Organizer",
-  description: "Marwen Rabai is a seasoned Digital Marketing & SEO Specialist and Event Organizer with over 14 years of experience delivering transformative solutions across North Africa. As General Manager at Oasis of Artis in Tunis, Administration Secretary at Beta Cod in El Oued, and Founder & CEO of Uber Sand Food, I've honed a results-driven approach to crafting impactful events, websites, and apps like Criti-Aura. My expertise in SEO, content creation, and leadership ensures client success through innovative, user-centric strategies. Outside work, I enjoy swimming, football, and golfing, and am fluent in English, French, and Arabic, connecting with global audiences from North Africa.",
+  title: "Digital Marketing & SEO Specialist | Event Organizer | CRIST-Aura",
+  description: "Marwen Rabai is a seasoned Digital Marketing & SEO Specialist and Event Organizer with over 14 years of experience delivering transformative solutions across North Africa. As General Manager at Oasis of Artis in Tunis, Administration Secretary at Beta Cod in El Oued, and Founder & CEO of Uber Sand Food, I've honed a results-driven approach to crafting impactful events, websites, and apps like CRIST-Aura. My expertise in SEO, content creation, and leadership ensures client success through innovative, user-centric strategies. Outside work, I enjoy swimming, football, and golfing, and am fluent in English, French, and Arabic, connecting with global audiences from North Africa.",
   experience: "14+ years",
   location: "North Africa",
   languages: ["English", "French", "Arabic"],
@@ -113,15 +113,15 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Criti-Aura",
-    des: "A revolutionary app redefining user interaction through AI-driven personalization and cutting-edge UX. Criti-Aura sets a new benchmark for intelligent mobile experiences.",
+    title: "CRIST-Aura",
+    des: "A revolutionary app redefining user interaction through AI-driven personalization and cutting-edge UX. CRIST-Aura sets a new benchmark for intelligent mobile experiences and the art of being seen.",
     src: "/premium/Cr7 Cristi Aura Logo.jpg",
     iconLists: [
       icons["React Native"],
       icons["OpenAI"],
       icons["Firebase"],
     ],
-    link: "https://criti-aura.com",
+    link: "https://crist-aura.com",
   },
   {
     id: 3,
@@ -251,4 +251,12 @@ export const socialMedia = [
     Image: "/wha.svg",
     link: "tel:213794236519"
   },
+  {
+    id: 4,
+    Image: "/link.svg",
+    link: "mailto:marwenrabai6@gmail.com"
+  },
 ];
+
+// Update the hero description
+export const heroDescription = "Crafting premium digital experiences and unforgettable events with 14+ years of expertise spanning the globe";

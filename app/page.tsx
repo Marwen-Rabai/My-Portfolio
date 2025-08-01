@@ -84,20 +84,26 @@ export default function Home() {
     "git log --oneline --graph",
     "node --version",
     "npm list --depth=0",
+    "echo 'Marwen Rabai - CRIST-Aura'",
+    "status --digital-architect",
   ];
 
   const artCommands = [
-    "analyze --portfolio marwen-rabai",
+    "analyze --portfolio Marwen-Rabai",
     "optimize --mobile-experience",
     "deploy --premium-mode",
     "status --digital-architect",
+    "echo 'CRIST-Aura - The Art of Being Seen'",
+    "connect --marwen-rabai@proton.me",
   ];
 
   const contactCommands = [
     "ssh user@contact-server",
-    "connect --marwen-rabai",
+    "connect --Marwen-Rabai",
     "send --message premium-inquiry",
     "encrypt --secure-channel",
+    "echo 'Marwen Rabai - CRIST-Aura'",
+    "mailto:marwen-rabai@proton.me",
   ];
 
   return (
