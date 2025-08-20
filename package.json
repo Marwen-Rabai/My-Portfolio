@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev-clean": "cross-env NODE_ENV=production __NEXT_DISABLE_OVERLAY=true next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "cross-env NODE_ENV=production __NEXT_DISABLE_OVERLAY=true next build",
+    "build-production": "cross-env NODE_ENV=production __NEXT_DISABLE_OVERLAY=true __NEXT_DISABLE_OVERLAY_WARNING=true next build",
+    "start": "cross-env NODE_ENV=production __NEXT_DISABLE_OVERLAY=true next start",
+    "lint": "next lint",
+    "clean": "rimraf .next out node_modules/.cache"
   },
   "dependencies": {
     "@tsparticles/engine": "^3.7.1",

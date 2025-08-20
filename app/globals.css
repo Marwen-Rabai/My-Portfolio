@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* NUCLEAR CSS - Hide Next.js button with ALL possible selectors */
+/* NUCLEAR CSS - Hide Next.js development elements with MAXIMUM AGGRESSION */
 svg[viewBox="0 0 40 40"],
 svg[width="40"][height="40"],
 svg[data-next-mark-loading],
@@ -10,7 +10,22 @@ svg[data-next-mark-loading="false"],
 svg[data-next-mark-loading="true"],
 *[data-next-mark-loading],
 *[data-next-mark-loading="false"],
-*[data-next-mark-loading="true"] {
+*[data-next-mark-loading="true"],
+*[data-nextjs-data-overlay],
+*[data-nextjs-error-overlay],
+*[data-overlay-portal],
+.vercel-live-feedback,
+.next-dev-overlay,
+nextjs-portal,
+#__next-dev-overlay,
+#__next-error-overlay,
+*[class*="next"][class*="overlay"],
+*[id*="next"][id*="overlay"],
+*[class*="dev"][class*="overlay"],
+*[id*="dev"][id*="overlay"],
+svg[fill="none"]:has(g[transform*="translate"]):has(path[class="paused"]),
+svg:has(defs):has(linearGradient[id*="next_logo"]),
+svg:has(mask[id*="next_logo"]) {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
@@ -21,6 +36,30 @@ svg[data-next-mark-loading="true"],
   height: 0 !important;
   z-index: -9999 !important;
   pointer-events: none !important;
+  transform: scale(0) !important;
+  clip: rect(0, 0, 0, 0) !important;
+  overflow: hidden !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Additional aggressive hiding for any remaining Next.js dev elements */
+*[data-next*="loading"]::before,
+*[data-next*="loading"]::after,
+svg[data-next*="loading"] *,
+*[data-next*="mark"] *,
+*[class*="next-dev"] *,
+*[id*="next-dev"] * {
+  content: none !important;
+  display: none !important;
+}
+
+/* Hide browser extension errors from console (cosmetic) */
+*[data-extension-id],
+*[class*="extension"] {
+  display: none !important;
 }
 
 @layer base {

@@ -1,0 +1,20 @@
+# Vérifier le statut
+git status
+
+# Démarrer le site comme avant
+npm run dev
+
+# Annuler le dernier commit (d6212bf)
+git reset --hard HEAD~1
+
+# Forcer la mise à jour
+git push --force origin master
+
+# Voir l'historique des commits
+git log --oneline
+
+# Revenir au commit AVANT tous les changements de ce chat
+git reset --hard 85a947c
+
+# Forcer la mise à jour sur GitHub
+git push --force origin master

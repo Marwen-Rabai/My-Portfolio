@@ -25,6 +25,15 @@ const nextConfig: NextConfig = {
   distDir: 'out',
   assetPrefix: process.env.NODE_ENV === 'production' ? '/' : '',
   reactStrictMode: false,
+  // COMPLETELY DISABLE DEVELOPMENT OVERLAYS AND INDICATORS
+  onDemandEntries: {
+    maxInactiveAge: 25 * 1000,
+    pagesBufferLength: 2,
+  },
+  // Disable development features in production
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
+  generateEtags: false,
 };
 
 export default nextConfig;
