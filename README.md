@@ -4,7 +4,7 @@
 > 
 > A premium, interactive portfolio website showcasing 14+ years of entrepreneurial achievements, digital marketing expertise, and innovative ventures across North Africa.
 
-**Live Demo:** [marwen-rabai.netlify.app](https://marwen-rabai.netlify.app)
+**Live Demo:** [marwenrabai.com](https://marwenrabai.com)
 
 ---
 
@@ -12,8 +12,8 @@
 
 This is a cutting-edge portfolio platform for **Marwen Rabai**, highlighting multiple successful ventures and professional expertise:
 
-- 🏢 **Cristi Labs** — Innovation-driven technology lab ([cristilabs.net](https://cristilabs.net))
-- 🎨 **Cristi Aura** — Next-generation personal branding platform ([dealroom.cristilabs.net](https://dealroom.cristilabs.net))
+- 🏢 **Cristi Labs** — Innovation-driven technology lab
+- 🎨 **Cristi Aura** — Next-generation personal branding platform
 - 🍔 **Uber Sand Food** — Pioneering food delivery venture for North Africa
 - 🎵 **TEMF** — Tunisia Electronic Music Festival (Premier electronic music event)
 - 🏛️ **Oasis of Artis** — Event management & cultural venue in Tunis
