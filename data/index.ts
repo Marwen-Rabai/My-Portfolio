@@ -8,8 +8,8 @@ export const navItems = [
 
 export const aboutMe = {
   name: "Marwen Rabai",
-  title: "Digital Marketing & SEO Specialist | Event Organizer | CRIST-Aura",
-  description: "Marwen Rabai is a seasoned Digital Marketing & SEO Specialist and Event Organizer with over 14 years of experience delivering transformative solutions across North Africa. As General Manager at Oasis of Artis in Tunis, Administration Secretary at Beta Cod in El Oued, and Founder & CEO of Uber Sand Food, I've honed a results-driven approach to crafting impactful events, websites, and apps like CRIST-Aura. My expertise in SEO, content creation, and leadership ensures client success through innovative, user-centric strategies. Outside work, I enjoy swimming, football, and golfing, and am fluent in English, French, and Arabic, connecting with global audiences from North Africa.",
+  title: "Serial Entrepreneur | Founder of Cristi Labs, Cristi Aura & TEMF | Digital Marketing & SEO Strategist",
+  description: "Marwen Rabai is a visionary serial entrepreneur and Digital Marketing & SEO Strategist with over 14 years of experience building transformative ventures across North Africa and beyond. He is the Founder of Cristi Labs (cristilabs.net), an innovation-driven technology lab pushing the boundaries of digital creation, and the Founder of Cristi Aura (dealroom.cristilabs.net), a next-generation platform redefining personal branding and user experience. As Founder & CEO of Uber Sand Food, Marwen pioneered a bold food delivery concept tailored to the North African market. He is also the Founder and Organizer of the Tunisia Electronic Music Festival (TEMF), one of North Africa's most celebrated electronic music events, bridging culture, technology, and entertainment on an international stage. As General Manager at Oasis of Artis in Tunis, Marwen has consistently demonstrated executive-level leadership — combining creative vision with strategic execution. His expertise spans SEO, content creation, event production, app development, and brand strategy, all anchored by a deep passion for innovation and a relentless commitment to excellence. Fluent in English, French, and Arabic, he connects with global audiences while remaining deeply rooted in North African culture.",
   experience: "14+ years",
   location: "North Africa",
   languages: ["English", "French", "Arabic"],
@@ -253,8 +253,8 @@ export const socialMedia = [
   },
   {
     id: 4,
-    Image: "/link.svg",
-    link: "mailto:marwenrabai6@gmail.com"
+    Image: "/insta.svg",
+    link: "https://www.instagram.com/marwen_rabai?igsh=bmsybW5za2Y1Ynl2"
   },
 ];
 

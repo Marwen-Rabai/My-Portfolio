@@ -1,44 +1,42 @@
 import { ImageResponse } from 'next/og';
+import fs from 'fs';
+import path from 'path';
 
-// Image metadata
 export const size = {
   width: 32,
   height: 32,
 };
 export const contentType = 'image/png';
-
-// Required for static export
 export const dynamic = 'force-static';
 
-// Image generation
-export default function Icon() {
+export default async function Icon() {
+  const imgBuffer = fs.readFileSync(path.join(process.cwd(), 'public', 'MY_Picture.webp'));
+  const base64 = `data:image/webp;base64,${imgBuffer.toString('base64')}`;
+
   return new ImageResponse(
     (
       <div
         style={{
-          background: 'linear-gradient(45deg, #00FFFF, #FF0080)',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRadius: '4px',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          background: 'linear-gradient(45deg, #00FFFF, #FF0080)',
         }}
       >
-        <div
+        <img
+          src={base64}
           style={{
-            color: '#000',
-            fontSize: '18px',
-            fontWeight: 'bold',
-            fontFamily: 'monospace',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
           }}
-        >
-          MR
-        </div>
+        />
       </div>
     ),
-    {
-      ...size,
-    }
+    { ...size }
   );
-} 
+}

@@ -42,7 +42,7 @@ const Contact = () => {
       const templateParams = {
         from_email: formData.email,
         message: formData.message,
-        to_email: "marwenrabai6@gmail.com", // Your new email
+        to_email: "Marwenrabai@proton.me",
       };
 
       const response = await emailjs.send(serviceId, templateId, templateParams, userId);
@@ -252,10 +252,10 @@ const Contact = () => {
                   <p className="text-cyber-teal/60 text-xs font-mono">
                     Or contact me directly at:{" "}
                     <a 
-                      href="mailto:marwenrabai6@gmail.com" 
+                      href="mailto:Marwenrabai@proton.me"
                       className="text-cyber-teal hover:text-cyber-teal/80 transition-colors"
                     >
-                      marwenrabai6@gmail.com
+                      Marwenrabai@proton.me
                     </a>
                   </p>
                 </div>

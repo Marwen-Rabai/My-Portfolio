@@ -206,13 +206,13 @@ const NewHero = () => {
             className="mb-12"
           >
             <div className="text-xl md:text-3xl font-mono text-white/90 mb-4">
-              <motion.span 
+              <motion.span
                 className="text-cyber-teal"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 1.8 }}
               >
-                DIGITAL MARKETING SPECIALIST
+                SERIAL ENTREPRENEUR · FOUNDER · DIGITAL STRATEGIST
               </motion.span>
               <motion.span
                 animate={{ opacity: [1, 0] }}
@@ -223,15 +223,20 @@ const NewHero = () => {
               </motion.span>
             </div>
 
-            <motion.p 
+            <motion.p
               className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 2.0 }}
             >
-              Crafting premium digital experiences and unforgettable events with{" "}
-              <span className="text-cyber-teal font-semibold">14+ years</span> of expertise across{" "}
-              <span className="text-cyber-magenta font-semibold">North Africa</span>
+              Founder of{" "}
+              <span className="text-cyber-teal font-semibold">Cristi Labs</span>,{" "}
+              <span className="text-cyber-magenta font-semibold">Cristi Aura</span>,{" "}
+              <span className="text-cyber-teal font-semibold">Uber Sand Food</span> &{" "}
+              <span className="text-cyber-magenta font-semibold">TEMF</span>{" "}
+              — building transformative ventures across{" "}
+              <span className="text-white font-semibold">North Africa</span> with{" "}
+              <span className="text-cyber-teal font-semibold">14+ years</span> of expertise
             </motion.p>
           </motion.div>
 

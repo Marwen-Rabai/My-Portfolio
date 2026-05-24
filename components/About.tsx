@@ -143,19 +143,23 @@ const About = () => {
                 <ul className="space-y-2 text-white/80">
                   <li className="flex items-start gap-2">
                     <span className="text-cyber-teal mt-1">▸</span>
+                    <span>Founder of Cristi Labs — Innovation & Technology Lab (cristilabs.net)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyber-teal mt-1">▸</span>
+                    <span>Founder of Cristi Aura — Next-Gen Personal Branding Platform (dealroom.cristilabs.net)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyber-teal mt-1">▸</span>
+                    <span>Founder & CEO of Uber Sand Food — Food Delivery Pioneer</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyber-teal mt-1">▸</span>
+                    <span>Founder & Organizer of TEMF — Tunisia Electronic Music Festival</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyber-teal mt-1">▸</span>
                     <span>General Manager at Oasis of Artis in Tunis</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-cyber-teal mt-1">▸</span>
-                    <span>Administration Secretary at Beta Cod in El Oued</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-cyber-teal mt-1">▸</span>
-                    <span>Founder & CEO of Uber Sand Food</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-cyber-teal mt-1">▸</span>
-                    <span>Results-driven approach to digital solutions</span>
                   </li>
                 </ul>
               </div>
