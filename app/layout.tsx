@@ -8,6 +8,10 @@ import MobileScrollEnhancer from '@/components/ui/MobileScrollEnhancer'
 export const metadata: Metadata = {
   title: "Marwen Rabai - Digital Architect & Event Designer",
   description: "Crafting premium digital experiences and unforgettable events with 14+ years of expertise spanning the globe",
+  icons: {
+    icon: "/MY_Picture.webp",
+    apple: "/MY_Picture.webp",
+  },
 };
 
 export const viewport: Viewport = {
